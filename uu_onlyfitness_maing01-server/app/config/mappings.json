@@ -25,6 +25,12 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      
+      "test": {
+        "realization": "api/controllers/UserSettingController.test",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

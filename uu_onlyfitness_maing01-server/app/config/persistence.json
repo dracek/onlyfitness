@@ -6,6 +6,9 @@
       "schemaMap": {
         "onlyfitnessMain": {
           "realization": "dao/OnlyfitnessMainMongo"
+        },
+        "userSetting": {
+          "realization": "dao/UserSettingMongo"
         }
       }
     }
