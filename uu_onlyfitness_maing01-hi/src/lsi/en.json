@@ -31,6 +31,7 @@
   },
   "Menu": {
     "home": "Welcome",
+    "settings": "Settings",
     "about": "About Application"
   }
 }

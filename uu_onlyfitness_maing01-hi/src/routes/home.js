@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useSession, Lsi } from "uu5g05";
+import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
@@ -52,6 +52,11 @@ let Home = createVisualComponent({
     return (
       <div {...attrs}>
         <RouteBar />
+        <WelcomeRow>
+          <Uu5Elements.Text category="story" segment="body" type="common">
+            <Content>{"<uu5string/>Proklik do <Uu5Elements.Link href='settings' >Nastavení</Uu5Elements.Link>"}</Content>
+            </Uu5Elements.Text>
+        </WelcomeRow>
         <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
           <Uu5Elements.Text category="story" segment="heading" type="h2">
             <Lsi import={importLsi} path={["Home", "welcome"]} />
