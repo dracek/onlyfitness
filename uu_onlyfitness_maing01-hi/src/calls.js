@@ -8,9 +8,15 @@ import Plus4U5 from "uu_plus4u5g02";
 //   }
 
 const Calls = {
+
   async call(method, url, dtoIn, clientOptions) {
     const response = await Plus4U5.Utils.AppClient[method](url, dtoIn, clientOptions);
     return response.data;
+  },
+
+  test(dtoIn) {
+    let commandUri = Calls.getCommandUri("test");
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   // // example for mock calls

@@ -2,6 +2,7 @@
 import { createComponent } from "uu5g05";
 import { Children, cloneElement } from "react";
 import Config from "./config/config.js";
+import Calls from "calls";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -27,17 +28,42 @@ const SettingDataProvider = createComponent({
     //@@viewOn:private
     const { children } = props;
 
+    async function handleTest(values) {
+
+      console.log("testin' time!", values);
+
+      try {
+        let res = await Calls.test();
+        console.log("FETCHED");
+        console.log(res);
+        return res;
+
+      } catch (error) {
+        console.log("NOT GOOD");
+        console.error(error);
+      }
+    }
+
+
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
-    const value = { name: "data test"}; // data propagation test
+    const data = { 
+      name: "data test",
+      callsMap: {
+        handleTest: handleTest
+      }
+      
+    }; // data propagation test
+
+
 
     return (<>
-      {Children.map(children, (child, index) =>
-        cloneElement(child, value)
+      {Children.map(children, (child) =>
+        cloneElement(child, data)
       )}
     </>);
 

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils, Content, useEffect } from "uu5g05";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -32,6 +32,13 @@ const Settings = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
+
+    useEffect(() => {
+      console.log("calls!");
+      props.callsMap.handleTest();
+    }, []);
+
+    
     //@@viewOff:private
 
     //@@viewOn:interface
