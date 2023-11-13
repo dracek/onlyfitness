@@ -28,6 +28,22 @@
       "test": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "userSetting/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "userSetting/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "userSetting/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "userSetting/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

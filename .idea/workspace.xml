@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="41b0e3ae-a21d-4167-bca2-0ee04d703794" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-hi/src/calls.js" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-hi/src/calls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/abl/user-setting-abl.js" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/abl/user-setting-abl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/controllers/user-setting-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/controllers/user-setting-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/errors/user-setting-error.js" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/errors/user-setting-error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/validation_types/user-setting-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/api/validation_types/user-setting-types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/config/mappings.json" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/config/mappings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/config/profiles.json" beforeDir="false" afterPath="$PROJECT_DIR$/uu_onlyfitness_maing01-server/app/config/profiles.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Y4VfWqii78xoezHeNq4UnIrZAi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Projects/uu_shoplist_maing01"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="41b0e3ae-a21d-4167-bca2-0ee04d703794" name="Changes" comment="" />
+      <created>1699784947252</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699784947252</updated>
+    </task>
+    <servers />
+  </component>
+</project>

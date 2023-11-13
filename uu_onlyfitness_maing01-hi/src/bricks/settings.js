@@ -35,7 +35,7 @@ const Settings = createVisualComponent({
 
     useEffect(() => {
       console.log("calls!");
-      props.callsMap.handleTest();
+      props.callsMap.getUserSetting();
     }, []);
 
     
@@ -48,7 +48,7 @@ const Settings = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Settings);
 
-    console.log("Settings props:", props);
+    console.log("Settings props data:", props.data);
 
     return currentNestingLevel ? (
       <div {...attrs}>

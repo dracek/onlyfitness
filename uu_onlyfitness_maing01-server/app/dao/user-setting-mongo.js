@@ -19,6 +19,29 @@ class UserSettingMongo extends UuObjectDao {
     return await super.findOne(filter);
   }
 
+  async update(uuObject) {
+    let filter = {
+      awid: uuObject.awid,
+      id: uuObject.id,
+    };
+    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+  }
+
+  async remove(awid, id) {
+    let filter = {
+      awid: awid,
+      id: id,
+    };
+    return await super.deleteOne(filter);
+  }
+  
+  async list(awid, pageInfo = {}, sortBy = {}, projection = {}) {
+    return await super.find({ awid }, pageInfo, sortBy, projection);
+  }
+  
+  async listByFilter(awid, filter, pageInfo = {}, sortBy = {}, projection = {}) {
+    return await super.find({ awid, ...filter}, pageInfo, sortBy, projection);
+  }
 
 }
 

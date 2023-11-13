@@ -7,6 +7,23 @@ const Errors = require("../api/errors/user-setting-error.js");
 
 const WARNINGS = {
 
+  Create: {
+    UnsupportedKeys: {
+      code: `${Errors.Create.UC_CODE}unsupportedKeys`,
+    },
+  },
+
+  Get: {
+    UnsupportedKeys: {
+      code: `${Errors.Get.UC_CODE}unsupportedKeys`,
+    },
+  },
+
+  Delete: {
+    UnsupportedKeys: {
+      code: `${Errors.Delete.UC_CODE}unsupportedKeys`,
+    },
+  }
 };
 
 class UserSettingAbl {
@@ -15,6 +32,82 @@ class UserSettingAbl {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("userSetting");
   }
+
+  async create(awid, session, dtoIn) {
+    
+  }
+
+  async get(awid, session, dtoIn) {
+
+    const validationResult = this.validator.validate("settingsIdDtoInType", dtoIn);
+
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      {},
+      WARNINGS.Get.UnsupportedKeys.code,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let dtoOut = await this.dao.get(awid, dtoIn.id);
+
+    if (!dtoOut) { // pokud uzivatel jeste neexistuje, vraci se prazdny objekt jen s awid a errorMap (ale nehodi chybu)
+      dtoOut = {
+        awid,
+        id: dtoIn.id
+      };
+    }
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+    return dtoOut;
+
+  }
+
+  async update(awid, session, dtoIn) {
+    //Meno, pohlavie, výška, váha, dátum narodenia (?)
+
+    
+      /*
+    let dtoOut;
+    try {
+      dtoOut = await this.dao.create(dtoIn);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.GameDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+*/
+    
+  }
+
+  async delete(awid, session, dtoIn) {
+
+    const validationResult = this.validator.validate("settingsIdDtoInType", dtoIn);
+
+    let uuAppErrorMap = {};
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      WARNINGS.Delete.UnsupportedKeys.code,
+      Errors.Delete.InvalidDtoIn
+    );
+
+    await this.dao.remove(awid, dtoIn.id);
+
+    dtoOut = {
+        awid,
+        id: dtoIn.id,
+        uuAppErrorMap: uuAppErrorMap
+    };
+
+    return dtoOut;
+    
+  }
+
+/***************************************/
 
   async test(awid, session, dtoIn) {
     console.log(" ");

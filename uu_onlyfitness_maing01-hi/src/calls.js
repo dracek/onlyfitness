@@ -14,6 +14,14 @@ const Calls = {
     return response.data;
   },
 
+  getUserSetting(dtoIn) {
+    let commandUri = Calls.getCommandUri("userSetting/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+
+
+  
   test(dtoIn) {
     let commandUri = Calls.getCommandUri("test");
     return Calls.call("get", commandUri, dtoIn);

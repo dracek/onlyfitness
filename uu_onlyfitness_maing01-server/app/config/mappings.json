@@ -26,10 +26,29 @@
         "httpMethod": "GET",
         "type": "UVE"
       },
-      
       "test": {
         "realization": "api/controllers/UserSettingController.test",
         "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "userSetting/create": {
+        "realization": "api/controllers/UserSettingController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "userSetting/get": {
+        "realization": "api/controllers/UserSettingController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "userSetting/update": {
+        "realization": "api/controllers/UserSettingController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "userSetting/delete": {
+        "realization": "api/controllers/UserSettingController.delete",
+        "httpMethod": "POST",
         "type": "CMD"
       }
     }

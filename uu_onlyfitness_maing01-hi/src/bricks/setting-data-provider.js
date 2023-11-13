@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent } from "uu5g05";
+import { createComponent, useSession, useState } from "uu5g05";
 import { Children, cloneElement } from "react";
 import Config from "./config/config.js";
 import Calls from "calls";
@@ -28,42 +28,40 @@ const SettingDataProvider = createComponent({
     //@@viewOn:private
     const { children } = props;
 
-    async function handleTest(values) {
+    const { identity } = useSession();
+    const [data, setData] = useState(null);
 
-      console.log("testin' time!", values);
+    //console.log(identity, "---");
 
+
+    async function getUserSetting() {
       try {
-        let res = await Calls.test();
-        console.log("FETCHED");
-        console.log(res);
-        return res;
+        let res = await Calls.getUserSetting({ id: identity.uuIdentity });
+        console.log("FETCHED", res);
+        setData(res);
 
       } catch (error) {
-        console.log("NOT GOOD");
-        console.error(error);
+        console.error("NOT GOOD", error);
       }
     }
-
-
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
-    const data = { 
-      name: "data test",
+    const newProps = { 
+      data,
       callsMap: {
-        handleTest: handleTest
+        getUserSetting,
       }
-      
-    }; // data propagation test
+    };
 
 
 
     return (<>
       {Children.map(children, (child) =>
-        cloneElement(child, data)
+        cloneElement(child, newProps)
       )}
     </>);
 
