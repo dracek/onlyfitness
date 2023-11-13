@@ -4,5 +4,14 @@
 
 
 const settingsIdDtoInType = shape({
-    id: uu5String().isRequired(),
+    id: string().isRequired(),
+});
+
+const settingsCreateDtoInType = shape({
+    id: string().isRequired(),
+    name: string(255),
+    gender: oneOf(["F","M"]),
+    height: integer(1, 299),
+    weight: integer(1, 999),
+    birthDate: date()
 });

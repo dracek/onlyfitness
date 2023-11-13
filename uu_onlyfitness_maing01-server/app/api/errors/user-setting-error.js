@@ -13,6 +13,14 @@ const Create = {
       this.message = "DtoIn is not valid.";
     }
   },
+
+  SettingsDaoCreateFailed: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}settingsDaoCreateFailed`;
+      this.message = "Create failed.";
+    }
+  },
 };
 
 const Get = {

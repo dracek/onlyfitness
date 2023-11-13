@@ -1,7 +1,7 @@
 "use strict";
 const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
-const { DaoFactory } = require("uu_appg01_server").ObjectStore;
+const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/user-setting-error.js");
 
@@ -16,6 +16,12 @@ const WARNINGS = {
   Get: {
     UnsupportedKeys: {
       code: `${Errors.Get.UC_CODE}unsupportedKeys`,
+    },
+  },
+
+  Update: {
+    UnsupportedKeys: {
+      code: `${Errors.Update.UC_CODE}unsupportedKeys`,
     },
   },
 
@@ -34,6 +40,31 @@ class UserSettingAbl {
   }
 
   async create(awid, session, dtoIn) {
+
+    const validationResult = this.validator.validate("settingsCreateDtoInType", dtoIn);
+
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      {},
+      WARNINGS.Create.UnsupportedKeys.code,
+      Errors.Create.InvalidDtoIn
+    );
+
+    let dtoOut;
+    try {
+      dtoIn.awid = awid;
+      dtoOut = await this.dao.create(dtoIn);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.SettingsDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+    return dtoOut;
     
   }
 
@@ -65,23 +96,34 @@ class UserSettingAbl {
   }
 
   async update(awid, session, dtoIn) {
-    //Meno, pohlavie, výška, váha, dátum narodenia (?)
 
-    
-      /*
+    const validationResult = this.validator.validate("settingsCreateDtoInType", dtoIn);
+
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      {},
+      WARNINGS.Update.UnsupportedKeys.code,
+      Errors.Update.InvalidDtoIn
+    );
+
     let dtoOut;
     try {
-      dtoOut = await this.dao.create(dtoIn);
+      dtoIn.awid = awid;
+      dtoOut = await this.dao.update(dtoIn);
     } catch (e) {
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Create.GameDaoCreateFailed({ uuAppErrorMap }, e);
+        throw new Errors.Create.SettingsDaoCreateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
-*/
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+    return dtoOut;
     
   }
-
+  
   async delete(awid, session, dtoIn) {
 
     const validationResult = this.validator.validate("settingsIdDtoInType", dtoIn);
@@ -95,9 +137,10 @@ class UserSettingAbl {
       Errors.Delete.InvalidDtoIn
     );
 
-    await this.dao.remove(awid, dtoIn.id);
+    // todo - nejdriv get
+    await this.dao.remove(awid, dtoIn.id); // nevaliduje se, jestli vubec entita existuje
 
-    dtoOut = {
+    let dtoOut = {
         awid,
         id: dtoIn.id,
         uuAppErrorMap: uuAppErrorMap
