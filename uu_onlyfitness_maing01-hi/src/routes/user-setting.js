@@ -1,6 +1,10 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
 import RouteBar from "../core/route-bar.js";
+import UserProfile from "../bricks/user-profile.js";
+import UserProfileForm from "../bricks/user-profile-form.js";
+
+
 
 import SettingDataProvider from "../bricks/setting-data-provider.js";
 import Settings from "../bricks/settings.js";
@@ -46,17 +50,14 @@ const UserSetting = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, UserSetting);
 
     return currentNestingLevel ? (
-      <div {...attrs}>
+      <div className="profile" {...attrs}
+      style={{backgroundColor:'black',color:'white',}}>
         <RouteBar />
-        <div>Visual Component {UserSetting.uu5Tag}</div>
-        <div>já sem nová komponenta totiš!</div>
-        <SettingDataProvider>
-          <Settings />
-        </SettingDataProvider>
+        
+        <UserProfile />
         <Content nestingLevel={currentNestingLevel}>{children}</Content>
       </div>
     ) : null;
-    //@@viewOff:render
   },
 });
 
