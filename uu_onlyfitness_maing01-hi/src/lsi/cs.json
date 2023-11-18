@@ -13,7 +13,9 @@
     "rightsError": "K zobrazení komponenty nemáte dostatečná práva.",
     "btNotConnected": "Aplikace není napojená na Business Territory."
   },
- 
+  "Home": {
+    "welcome": "Čau,"
+  }, 
   "InitAppWorkspace": {
     "notAuthorized": "Nemáte dostatečná práva k použití aplikace.",
     "formHeader": "Inicializovat aplikaci",

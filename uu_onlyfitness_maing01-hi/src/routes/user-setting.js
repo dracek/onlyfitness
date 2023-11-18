@@ -2,9 +2,6 @@
 import { createVisualComponent, Utils, Content } from "uu5g05";
 import RouteBar from "../core/route-bar.js";
 import UserProfile from "../bricks/user-profile.js";
-import UserProfileForm from "../bricks/user-profile-form.js";
-
-
 
 import SettingDataProvider from "../bricks/setting-data-provider.js";
 import Settings from "../bricks/settings.js";
@@ -16,7 +13,10 @@ import Config from "./config/config.js";
 
 //@@viewOn:css
 const Css = {
-  main: () => Config.Css.css({}),
+  main: () => Config.Css.css({
+    backgroundColor:'black',
+    color:'white'
+  }),
 };
 //@@viewOff:css
 
@@ -50,12 +50,11 @@ const UserSetting = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, UserSetting);
 
     return currentNestingLevel ? (
-      <div className="profile" {...attrs}
-      style={{backgroundColor:'black',color:'white',}}>
+      <div {...attrs}>
         <RouteBar />
-        
-        <UserProfile />
-        <Content nestingLevel={currentNestingLevel}>{children}</Content>
+        <SettingDataProvider>
+          <UserProfile />
+        </SettingDataProvider>
       </div>
     ) : null;
   },

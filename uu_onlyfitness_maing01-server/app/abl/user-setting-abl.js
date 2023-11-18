@@ -32,6 +32,13 @@ const WARNINGS = {
   }
 };
 
+const defaultSettings = {
+  gender: "O",
+  age: 0,
+  weight: 0,
+  height: 0,
+};
+
 class UserSettingAbl {
 
   constructor() {
@@ -85,7 +92,8 @@ class UserSettingAbl {
     if (!dtoOut) { // pokud uzivatel jeste neexistuje, vraci se prazdny objekt jen s awid a errorMap (ale nehodi chybu)
       dtoOut = {
         awid,
-        id: dtoIn.id
+        id: dtoIn.id,
+        ...defaultSettings
       };
     }
 
@@ -110,10 +118,18 @@ class UserSettingAbl {
     let dtoOut;
     try {
       dtoIn.awid = awid;
-      dtoOut = await this.dao.update(dtoIn);
+
+      const user = await this.dao.get(awid, dtoIn.id);
+
+      if (user){
+        dtoOut = await this.dao.update(dtoIn);
+      } else {
+        dtoOut = await this.dao.create(dtoIn);
+      }
+
     } catch (e) {
       if (e instanceof ObjectStoreError) {
-        throw new Errors.Create.SettingsDaoCreateFailed({ uuAppErrorMap }, e);
+        throw new Errors.Update.SettingsDaoUpdateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }

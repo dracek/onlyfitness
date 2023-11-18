@@ -45,6 +45,14 @@ const Update = {
       this.message = "DtoIn is not valid.";
     }
   },
+
+  SettingsDaoUpdateFailed: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}settingsDaoUpdateFailed`;
+      this.message = "Update failed.";
+    }
+  },
 };
 
 const Delete = {

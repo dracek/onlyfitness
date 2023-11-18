@@ -3,6 +3,7 @@ import { createComponent, useSession, useState } from "uu5g05";
 import { Children, cloneElement } from "react";
 import Config from "./config/config.js";
 import Calls from "calls";
+import SettingsContext from "./settings-context.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -10,6 +11,10 @@ import Calls from "calls";
 
 //@@viewOn:helpers
 //@@viewOff:helpers
+
+const STATUS_DONE = "DONE";
+const STATUS_WAITING = "WAITING";
+const STATUS_ERROR = "ERROR";
 
 const SettingDataProvider = createComponent({
   //@@viewOn:statics
@@ -29,18 +34,33 @@ const SettingDataProvider = createComponent({
     const { children } = props;
 
     const { identity } = useSession();
-    const [data, setData] = useState(null);
-
-    //console.log(identity, "---");
-
+    const [status, setStatus] = useState(STATUS_DONE);
+    const [data, setData] = useState({});
 
     async function getUserSetting() {
       try {
+        setStatus(STATUS_WAITING);
         let res = await Calls.getUserSetting({ id: identity.uuIdentity });
+        setStatus(STATUS_DONE);
         console.log("FETCHED", res);
         setData(res);
 
       } catch (error) {
+        setStatus(ERROR);
+        console.error("NOT GOOD", error);
+      }
+    }
+
+    async function saveUserSetting(data) {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.saveUserSetting({ id: identity.uuIdentity, ...data });
+        setStatus(STATUS_DONE);
+        console.log("FETCHED", res);
+        setData(res);
+
+      } catch (error) {
+        setStatus(ERROR);
         console.error("NOT GOOD", error);
       }
     }
@@ -50,20 +70,18 @@ const SettingDataProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const newProps = { 
+    const newValue = {
+      status: status, 
       data,
       callsMap: {
         getUserSetting,
+        saveUserSetting
       }
     };
 
-
-
-    return (<>
-      {Children.map(children, (child) =>
-        cloneElement(child, newProps)
-      )}
-    </>);
+    return (<SettingsContext.Provider value={ newValue }>
+      {children}
+    </SettingsContext.Provider>);
 
     //@@viewOff:render
   },

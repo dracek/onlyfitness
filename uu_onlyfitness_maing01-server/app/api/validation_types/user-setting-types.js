@@ -10,8 +10,8 @@ const settingsIdDtoInType = shape({
 const settingsCreateDtoInType = shape({
     id: string().isRequired(),
     name: string(255),
-    gender: oneOf(["F","M"]),
-    height: integer(1, 299),
-    weight: integer(1, 999),
-    birthDate: date()
+    gender: oneOf(["F","M", "O"]),
+    height: integer(0, 299),
+    weight: integer(0, 999),
+    age: integer(0,150)
 });
