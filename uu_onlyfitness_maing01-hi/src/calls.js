@@ -19,6 +19,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  saveUserSetting(dtoIn) {
+    let commandUri = Calls.getCommandUri("userSetting/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
 
 
   

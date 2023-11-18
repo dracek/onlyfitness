@@ -5,7 +5,6 @@ import WelcomeRow from './welcome-row';
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import importLsi from "../lsi/import-lsi.js";
-import { Placeholder } from "react-bootstrap";
 
 const UserProfile = ({ onSave }) => {
     const [isEditing, setIsEditing] = useState(false);
