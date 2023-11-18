@@ -43,13 +43,13 @@ const UserProfile = ({ onSave }) => {
         {isEditing ? (
           <UserProfileForm onSave={handleSave} initialData={userSettings} />
         ) : (
-          <div className="profile-info" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="profile-info" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height:'100vh'}}>
             
             <p>Gender: {userSettings.gender}</p>
             <p>Height: {userSettings.height}</p>
             <p>Weight: {userSettings.weight}</p>
             <p>Age: {userSettings.age}</p>
-            <button style={{ width: '90px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black' }} onClick={handleEdit}>
+            <button style={{ width: '90px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', margin:'25px' }} onClick={handleEdit}>
               Edit
             </button>
           </div>
