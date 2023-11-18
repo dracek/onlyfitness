@@ -45,11 +45,11 @@ const UserProfile = ({ onSave }) => {
         ) : (
           <div className="profile-info" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height:'100vh'}}>
             
-            <p>Gender: {userSettings.gender}</p>
-            <p>Height: {userSettings.height}</p>
-            <p>Weight: {userSettings.weight}</p>
-            <p>Age: {userSettings.age}</p>
-            <button style={{ width: '90px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', margin:'25px' }} onClick={handleEdit}>
+            <p>Gender: <a style={{color:'orange'}}>{userSettings.gender} </a></p>
+            <p>Height: <a style={{color:'orange'}}>{userSettings.height}</a> cm</p>
+            <p>Weight: <a style={{color:'orange'}}>{userSettings.weight}</a> kg</p>
+            <p>Age: <a style={{color:'orange'}}>{userSettings.age}</a> years</p>
+            <button style={{ width: '120px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', margin:'25px' }} onClick={handleEdit}>
               Edit
             </button>
           </div>

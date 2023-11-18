@@ -19,7 +19,7 @@ const UserProfileForm = ({ onSave, initialData }) => {
     <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column', alignItems:'center', }}>
     <label>
       Gender:
-      <select name="gender" value={formData.gender || ''} onChange={handleChange}  style={{border: '1px solid orange', margin: '5px', borderRadius: '20px', padding: '5px', margin: '7px', backgroundColor:'black', color:'white', width:'120px'}} >
+      <select name="gender" value={formData.gender || ''} onChange={handleChange}  style={{border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor:'black', color:'white', width:'150px'}} >
         <option value="">Select Gender</option>
         <option value="M">Male</option>
         <option value="F">Female</option>
@@ -29,19 +29,22 @@ const UserProfileForm = ({ onSave, initialData }) => {
   <label>
     Height:
     <input type="number" name="height" value={formData.height || ''} onChange={handleChange}
-    style={{border: '1px solid orange', margin: '5px', borderRadius: '20px', padding: '5px', margin: '7px', backgroundColor:'black', color:'white', width:'120px'}} />
+    style={{border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor:'black', color:'white'}} />
+  cm
   </label>
       <label>
         Weight:
         <input type="number" name="weight" value={formData.weight || ''} onChange={handleChange}
-        style={{border: '1px solid orange', margin: '5px', borderRadius: '20px', padding: '5px', margin: '7px', backgroundColor:'black', color:'white', width:'120px'}}  />
+        style={{border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor:'black', color:'white'}}  />
+      kg
       </label>
       <label>
         Age:
         <input type="number" name="age" value={formData.age || ''} onChange={handleChange} 
-        style={{border: '1px solid orange', margin: '5px', borderRadius: '20px', padding: '5px', margin: '7px', backgroundColor:'black', color:'white', width:'120px'}} />
+        style={{border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor:'black', color:'white'}} />
+        years
       </label>
-      <button style={{width:'90px', padding:'7px', borderRadius:'20px', backgroundColor:'orange', color:'black'}} type="submit">Save</button>
+      <button style={{width:'120px', padding:'7px', borderRadius:'20px', backgroundColor:'orange', color:'black', margin:'25px'}} type="submit">Save</button>
     </form>
   
     </div>
