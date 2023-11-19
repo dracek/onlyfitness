@@ -34,9 +34,9 @@ const WARNINGS = {
 
 const defaultSettings = {
   gender: "O",
-  age: 0,
-  weight: 0,
-  height: 0,
+  age: 30,
+  weight: 60,
+  height: 160,
 };
 
 class UserSettingAbl {

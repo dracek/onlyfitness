@@ -1,14 +1,79 @@
 import React from 'react';
+import Config from "./config/config.js";
 import { useFormik } from 'formik';
+
+const Css = {
+  main: () => 
+    Config.Css.css({
+      height: '100vh'
+  }),
+
+  form: () => 
+    Config.Css.css({
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center' 
+  }),
+  
+  button: () => 
+    Config.Css.css({
+      width: '120px',
+      padding: '7px',
+      borderRadius: '20px',
+      backgroundColor: 'orange',
+      color: 'black',
+      marginTop: '25px',
+      cursor: "pointer"
+  }),
+
+  select: () => 
+    Config.Css.css({
+      border: '1px solid orange', 
+      margin: '7px', 
+      borderRadius: '20px', 
+      padding: '5px', 
+      backgroundColor: 'black', 
+      color: 'white', 
+      width: '150px'
+    }),
+
+  input: () => 
+    Config.Css.css({
+      border: `1px solid orange`,
+      margin: '7px',
+      borderRadius: '20px',
+      padding: '5px',
+      backgroundColor: 'black',
+      color: 'white'
+    }),
+
+  inputError: () => 
+    Config.Css.css({
+      border: `1px solid orange`,
+      margin: '7px',
+      borderRadius: '20px',
+      padding: '5px',
+      backgroundColor: 'orange',
+      color: 'black'
+    }),
+
+  errorMessage: () => 
+    Config.Css.css({
+      color: 'orange',
+      marginBottom: '7px'
+    })    
+};
 
 const UserProfileForm = ({ onCancel, onSave, data }) => {
   const formik = useFormik({
+
     initialValues: {
       gender: data.gender || 'O',
-      height: data.height ? data.height.toString() : '',
-      weight: data.weight ? data.weight.toString() : '',
-      age: data.age ? data.age.toString() : '',
+      height: data.height ? data.height.toString() : '0',
+      weight: data.weight ? data.weight.toString() : '0',
+      age: data.age ? data.age.toString() : '0',
     },
+
     validate: (values) => {
       const errors = {};
 
@@ -24,6 +89,11 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
         errors.height = "Are you sure about the height? Our range is only between 110 and 240 cm.";
       }
 
+      const age = parseInt(values.age, 10);
+      if (isNaN(age) || age < 15 || age > 150) {
+        errors.age = "Are you sure about the age? Our range is only between 15 and 150 years.";
+      }
+
       return errors;
     },
     onSubmit: (values) => {
@@ -37,81 +107,66 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
   });
 
   return (
-    <div style={{ height: '100vh' }}>
-      <form onSubmit={formik.handleSubmit} onReset={onCancel} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <label>
-          Gender:
+    <div className={Css.main()}>
+      <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
+        <div>
+          <label for={"gender"}>Gender:</label>
           <select
             name="gender"
             value={formik.values.gender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            style={{ border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor: 'black', color: 'white', width: '150px' }}
+            className={Css.select()}
             placeholder="Select Gender"
           >
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
           </select>
-        </label>
-        <label>
-          Height:
+        </div>
+        <div>
+          <label for={"height"}>Height:</label>
           <input
             type="number"
             name="height"
             value={formik.values.height}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            style={{
-              border: `1px solid ${formik.errors.height ? 'orange' : 'orange'}`,
-              margin: '7px',
-              borderRadius: '20px',
-              padding: '5px',
-              backgroundColor: formik.errors.height ? 'orange' : 'black',
-              color: 'white',
-            }}
-          />
-          cm
-          </label>
-          {formik.errors.height && <div style={{ color: 'orange' }}>{formik.errors.height}</div>}
+            className={formik.errors.height ? Css.inputError() : Css.input()}
+          />{"cm"}
+        </div>
+        {formik.errors.height && <div className={Css.errorMessage()} >{formik.errors.height}</div>}
         
-        <label>
-          Weight:
+        <div>
+          <label for={"weight"}>Weight:</label>
           <input
             type="number"
             name="weight"
             value={formik.values.weight}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            style={{
-              border: `1px solid ${formik.errors.weight ? 'orange' : 'orange'}`,
-              margin: '7px',
-              borderRadius: '20px',
-              padding: '5px',
-              backgroundColor: formik.errors.weight ? 'orange' : 'black',
-              color: 'white',
-            }}
-          />
-          kg
-          </label>
-          {formik.errors.weight && <div style={{ color: 'orange' }}>{formik.errors.weight}</div>}
+            className={formik.errors.weight ? Css.inputError() : Css.input()}
+          />{"kg"}
+        </div>
+        {formik.errors.weight && <div className={Css.errorMessage()} >{formik.errors.weight}</div>}
      
-        <label>
-          Age:
+        <div>
+          <label for={"age"}>Age:</label>
           <input
             type="number"
             name="age"
             value={formik.values.age}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            style={{ border: '1px solid orange', margin: '7px', borderRadius: '20px', padding: '5px', backgroundColor: 'black', color: 'white' }}
-          />
-          years
-        </label>
-        <button style={{ width: '120px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', marginTop: '25px' }} type="submit">
+            className={formik.errors.age ? Css.inputError() : Css.input()}
+          />{"years"}
+        </div>
+        {formik.errors.age && <div className={Css.errorMessage()} >{formik.errors.age}</div>}
+
+        <button className={Css.button()} type="submit">
           Save
         </button>
-        <button style={{ width: '120px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', marginTop: '25px' }} type="reset">
+        <button className={Css.button()} type="reset">
           Cancel
         </button>
       </form>
