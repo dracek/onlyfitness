@@ -44,6 +44,14 @@
       "userSetting/delete": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "activity/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "activity/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
