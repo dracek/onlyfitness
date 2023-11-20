@@ -4,6 +4,7 @@ import { Children, cloneElement } from "react";
 import Config from "./config/config.js";
 import Calls from "calls";
 import SettingsContext from "./settings-context.js";
+import { useAlertBus } from "uu5g05-elements";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -36,18 +37,32 @@ const SettingDataProvider = createComponent({
     const { identity } = useSession();
     const [status, setStatus] = useState(STATUS_DONE);
     const [data, setData] = useState({});
+    const { addAlert } = useAlertBus();
+
+    function infoMsg(msg){
+      addAlert(Object.assign({
+        priority: "success",
+        durationMs: 3000,
+      }, msg));
+    }
+
+    function alertMsg(msg){
+      addAlert(Object.assign({
+        header: "Error",
+        priority: "error",
+      }, msg));
+    }
 
     async function getUserSetting() {
       try {
         setStatus(STATUS_WAITING);
         let res = await Calls.getUserSetting({ id: identity.uuIdentity });
         setStatus(STATUS_DONE);
-        console.log("FETCHED", res);
         setData(res);
-
       } catch (error) {
-        setStatus(ERROR);
-        console.error("NOT GOOD", error);
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot get user settings.'})
+        //console.error("NOT GOOD", error);
       }
     }
 
@@ -56,12 +71,12 @@ const SettingDataProvider = createComponent({
         setStatus(STATUS_WAITING);
         let res = await Calls.saveUserSetting({ id: identity.uuIdentity, ...data });
         setStatus(STATUS_DONE);
-        console.log("FETCHED", res);
         setData(res);
-
+        infoMsg({message: 'Successfully saved.'})
       } catch (error) {
-        setStatus(ERROR);
-        console.error("NOT GOOD", error);
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot save user settings.'})
+        //console.error("NOT GOOD", error);
       }
     }
     //@@viewOff:private
