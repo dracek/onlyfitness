@@ -27,7 +27,7 @@ class ActivityAbl {
     this.dao = DaoFactory.getDao("activity");
   }
 
-  async create(session, dtoIn) {
+  async create(awid, session, dtoIn) {
     const validationResult = this.validator.validate("activityCreateDtoInType", dtoIn);
 
     let uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -40,7 +40,8 @@ class ActivityAbl {
 
     let dtoOut;
     try {
-      //dtoIn.awid = awid;
+      dtoIn.awid = awid;
+      dtoIn.activityDate = new Date(dtoIn.activityDate);
       dtoOut = await this.dao.create(dtoIn);
     } catch (e) {
       if (e instanceof ObjectStoreError) {
@@ -55,7 +56,7 @@ class ActivityAbl {
     
   }
   
-  async get(awid,session, dtoIn) {
+  async get(awid, session, dtoIn) {
     
     const validationResult = this.validator.validate("activityIdDtoInType", dtoIn);
 
@@ -69,11 +70,8 @@ class ActivityAbl {
 
     let dtoOut = await this.dao.get(awid, dtoIn.id);
 
-    if (!dtoOut) { // pokud activity jeste neexistuje, vraci se prazdny objekt jen s awid a errorMap (ale nehodi chybu)
-      dtoOut = {
-        awid,
-        id: dtoIn.id
-      };
+    if (!dtoOut) {
+      throw new Errors.Get.ActivityNotPresent({ uuAppErrorMap });
     }
 
     dtoOut.uuAppErrorMap = uuAppErrorMap;
