@@ -9,6 +9,9 @@
         },
         "userSetting": {
           "realization": "dao/UserSettingMongo"
+        },
+        "activity": {
+          "realization": "dao/ActivityMongo"
         }
       }
     }

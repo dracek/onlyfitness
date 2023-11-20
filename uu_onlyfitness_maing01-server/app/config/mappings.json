@@ -50,6 +50,16 @@
         "realization": "api/controllers/UserSettingController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "activity/get": {
+        "realization": "api/controllers/ActivityController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "activity/create": {
+        "realization": "api/controllers/ActivityController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }
