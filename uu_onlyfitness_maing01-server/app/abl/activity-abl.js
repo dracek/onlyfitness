@@ -40,8 +40,10 @@ class ActivityAbl {
 
     let dtoOut;
     try {
+      console.log(session)
       dtoIn.awid = awid;
       dtoIn.activityDate = new Date(dtoIn.activityDate);
+      dtoIn.ownerId = session.ownerId
       dtoOut = await this.dao.create(dtoIn);
     } catch (e) {
       if (e instanceof ObjectStoreError) {
