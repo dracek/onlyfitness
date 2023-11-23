@@ -5,7 +5,7 @@ const activityIdDtoInType = shape({
 });
 
 const activityCreateDtoInType = shape({
-    type: oneOf(["Swim","Run","Walk","Ride"]),
+    categoryId: string(255),
     time: integer(1, 1440),
     activityDate: date()
 });
