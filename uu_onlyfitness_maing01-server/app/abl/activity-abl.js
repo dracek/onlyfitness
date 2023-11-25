@@ -28,6 +28,8 @@ class ActivityAbl {
   }
 
   async create(awid, session, dtoIn) {
+    console.log(">>>---");
+    console.log(dtoIn)
     const validationResult = this.validator.validate("activityCreateDtoInType", dtoIn);
 
     let uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -40,10 +42,10 @@ class ActivityAbl {
 
     let dtoOut;
     try {
-      console.log(session)
+      console.log(session.getIdentity())
       dtoIn.awid = awid;
+      dtoIn.ownerId = session.getIdentity().getUuIdentity();
       dtoIn.activityDate = new Date(dtoIn.activityDate);
-      dtoIn.ownerId = session.ownerId
       dtoOut = await this.dao.create(dtoIn);
     } catch (e) {
       if (e instanceof ObjectStoreError) {
