@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Timer.css"; // Adjust the path based on your file structure
+import "./Timer.css"; 
 
 function Timer() {
   const [time, setTime] = useState(0);
