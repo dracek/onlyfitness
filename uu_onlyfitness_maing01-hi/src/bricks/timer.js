@@ -7,6 +7,24 @@ function Timer() {
   const [timerStarted, setTimerStarted] = useState(false);
   const timer = useRef();
 
+  //  local storage for now
+  useEffect(() => {
+    const savedTime = parseInt(localStorage.getItem("timerTime"), 10) || 0;
+    const savedRunning = localStorage.getItem("timerRunning") === "true";
+    const savedTimerStarted = localStorage.getItem("timerStarted") === "true";
+
+    setTime(savedTime);
+    setRunning(savedRunning);
+    setTimerStarted(savedTimerStarted);
+  }, []);
+
+  // Save tto local storage for now
+  useEffect(() => {
+    localStorage.setItem("timerTime", time.toString());
+    localStorage.setItem("timerRunning", running.toString());
+    localStorage.setItem("timerStarted", timerStarted.toString());
+  }, [time, running, timerStarted]);
+
   useEffect(() => {
     if (timerStarted && running) {
       timer.current = setInterval(() => {
