@@ -14,7 +14,7 @@
     "btNotConnected": "Aplikace není napojená na Business Territory."
   },
   "Home": {
-    "welcome": "Čau,"
+    "welcome": "Hello,"
   }, 
   "InitAppWorkspace": {
     "notAuthorized": "Nemáte dostatečná práva k použití aplikace.",
@@ -27,8 +27,8 @@
     "initialize": "Inicializovat"
   },
   "Menu": {
-    "home": "Vítejte",
-    "settings": "Nastavení",
-    "about": "O aplikaci"
+    "home": "Home",
+    "settings": "Settings",
+    "activity": "Activity"
   }
 }

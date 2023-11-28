@@ -1,0 +1,32 @@
+
+
+.stopwatch {
+    font-size: 36px;
+    text-align: center;
+    margin:  20px 50px;
+   padding: 25px;
+   border: 0.5px solid orange;
+   border-radius: 20px;
+  }
+  
+  
+  .stopwatch button {
+    font-size: 16px;
+    width: 120px;
+    padding: 7px;
+    border-radius: 20px;
+    
+    color: black;
+    margin: 50px 20px 0px; 
+  }
+  
+.stop {
+    background-color: orange;
+}
+.start button {
+    background-color: white;
+}
+
+
+
+  
