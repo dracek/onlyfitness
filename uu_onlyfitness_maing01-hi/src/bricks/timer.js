@@ -7,37 +7,45 @@ function Timer() {
   const [timerStarted, setTimerStarted] = useState(false);
   const timer = useRef();
 
-  //  local storage for now
+  //  load from local storage 
   useEffect(() => {
-    const savedTime = parseInt(localStorage.getItem("timerTime"), 10) || 0;
+    const savedTime = parseInt(localStorage.getItem("elapsedTime"), 10) || 0;
     const savedRunning = localStorage.getItem("timerRunning") === "true";
     const savedTimerStarted = localStorage.getItem("timerStarted") === "true";
 
     setTime(savedTime);
     setRunning(savedRunning);
     setTimerStarted(savedTimerStarted);
+
+    if (savedRunning && savedTimerStarted) {
+      startTimer();
+    }
   }, []);
 
-  // Save tto local storage for now
+  // Save the elapsed time to local storage 
   useEffect(() => {
-    localStorage.setItem("timerTime", time.toString());
+    localStorage.setItem("elapsedTime", time.toString());
     localStorage.setItem("timerRunning", running.toString());
     localStorage.setItem("timerStarted", timerStarted.toString());
   }, [time, running, timerStarted]);
 
-  useEffect(() => {
-    if (timerStarted && running) {
-      timer.current = setInterval(() => {
-        setTime((prev) => prev + 10);
-      }, 10);
-    } else {
-      clearInterval(timer.current);
-    }
-
-    return () => clearInterval(timer.current);
-  }, [running, timerStarted]);
+  const startTimer = () => {
+    timer.current = setInterval(() => {
+      setTime((prev) => prev + 10);
+    }, 10);
+  };
 
   const handleStartPauseClick = () => {
+    if (running) {
+      clearInterval(timer.current);
+    } else {
+   
+      if (!timerStarted) {
+        setTime(0);
+      }
+      startTimer();
+    }
+
     setRunning(!running);
     setTimerStarted(true);
   };
@@ -45,7 +53,7 @@ function Timer() {
   const handleStopClick = () => {
     clearInterval(timer.current);
     setRunning(false);
-    setTime(0);
+    setTimerStarted(false);
   };
 
   return (
