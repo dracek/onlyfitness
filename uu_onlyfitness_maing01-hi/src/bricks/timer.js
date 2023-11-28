@@ -54,6 +54,7 @@ function Timer() {
     clearInterval(timer.current);
     setRunning(false);
     setTimerStarted(false);
+    setTime(0);
   };
 
   return (
