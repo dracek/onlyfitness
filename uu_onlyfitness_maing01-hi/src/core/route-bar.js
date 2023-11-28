@@ -10,6 +10,8 @@ import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:constants
 
 //@@viewOn:css
+
+
 //@@viewOff:css
 
 //@@viewOn:helpers
@@ -30,17 +32,19 @@ const RouteBar = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+  
     const [, setRoute] = useRoute();
 
     const appActionList = [
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
       { children: <Lsi import={importLsi} path={["Menu", "settings"]} />, onClick: () => setRoute("settings") },
       {
-        children: <Lsi import={importLsi} path={["Menu", "about"]} />,
-        onClick: () => setRoute("about"),
+        children: <Lsi import={importLsi} path={["Menu", "activity"]} />,
+        onClick: () => setRoute("activity"),
         collapsed: true,
       },
     ];
+   
     //@@viewOff:private
 
     //@@viewOn:interface

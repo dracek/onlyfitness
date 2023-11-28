@@ -27,8 +27,8 @@
     "initialize": "Initialize"
   },
   "Menu": {
-    "home": "Welcome",
+    "home": "Hoem",
     "settings": "Settings",
-    "about": "About Application"
+    "activity": "Activity"
   }
 }
