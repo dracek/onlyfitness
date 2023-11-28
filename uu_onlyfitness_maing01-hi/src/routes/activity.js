@@ -54,7 +54,7 @@ const Activity = createVisualComponent({
 
     const handlePlanSelect = (plan) => {
       console.log(`Selected plan: ${plan}`);
-      // Add your logic to handle the selected plan here
+      
     };
 
     return currentNestingLevel ? (
