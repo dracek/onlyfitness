@@ -56,6 +56,10 @@
       "activity/delete": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "activity/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

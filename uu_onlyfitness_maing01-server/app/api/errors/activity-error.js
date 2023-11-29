@@ -58,7 +58,21 @@ const Delete = {
   
 };
 
+const Update = {
+  UC_CODE: `${ACTIVITY_ERROR_PREFIX}update/`,
+
+  InvalidDtoIn: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  
+};
+
 module.exports = {
+  Update,
   Delete,
   Create,
   Get
