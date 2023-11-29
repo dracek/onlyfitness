@@ -11,3 +11,8 @@ const initDtoInType = shape({
     estimatedEndTime: datetime(),
   }),
 });
+
+const activityCreateDtoInType = shape({
+  name: string(3, 255).isRequired(),
+  text: string(3, 4000).isRequired()
+});
