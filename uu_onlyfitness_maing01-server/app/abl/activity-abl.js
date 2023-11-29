@@ -17,6 +17,11 @@ const WARNINGS = {
         code: `${Errors.Get.UC_CODE}unsupportedKeys`,
       },
     },
+    Delete: {
+      UnsupportedKeys: {
+        code: `${Errors.Delete.UC_CODE}unsupportedKeys`,
+      },
+    }
 
 };
 
@@ -25,6 +30,31 @@ class ActivityAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("activity");
+  }
+
+  async delete(awid,session, dtoIn) {
+    const validationResult = this.validator.validate("activityIdDtoInType", dtoIn);
+
+    let uuAppErrorMap = {};
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      WARNINGS.Delete.UnsupportedKeys.code,
+      Errors.Delete.InvalidDtoIn
+    );
+
+    // todo - nejdriv get
+    await this.dao.remove(awid, dtoIn.id); // nevaliduje se, jestli vubec entita existuje
+
+    let dtoOut = {
+        awid,
+        id: dtoIn.id,
+        uuAppErrorMap: uuAppErrorMap
+    };
+
+    return dtoOut;
+    
   }
 
   async create(awid, session, dtoIn) {
