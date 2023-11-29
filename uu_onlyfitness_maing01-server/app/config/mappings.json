@@ -65,6 +65,11 @@
         "realization": "api/controllers/ActivityController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "activity/update": {
+        "realization": "api/controllers/ActivityController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

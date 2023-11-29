@@ -17,6 +17,13 @@ const WARNINGS = {
         code: `${Errors.Get.UC_CODE}unsupportedKeys`,
       },
     },
+
+    Update: {
+      UnsupportedKeys: {
+        code: `${Errors.Update.UC_CODE}unsupportedKeys`,
+      },
+    },
+
     Delete: {
       UnsupportedKeys: {
         code: `${Errors.Delete.UC_CODE}unsupportedKeys`,
@@ -30,6 +37,35 @@ class ActivityAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("activity");
+  }
+
+  async update(awid, session, dtoIn) {
+
+    const validationResult = this.validator.validate("activityUpdateDtoInType", dtoIn);
+
+    let uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      {},
+      WARNINGS.Update.UnsupportedKeys.code,
+      Errors.Update.InvalidDtoIn
+    );
+
+    let dtoOut;
+    try {
+      dtoIn.awid = awid;
+      dtoOut = await this.dao.update(dtoIn);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.ActivityDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+    return dtoOut;
+    
   }
 
   async delete(awid,session, dtoIn) {
