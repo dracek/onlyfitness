@@ -55,7 +55,12 @@
       "realization": "api/controllers/ActivityController.create",
       "httpMethod": "POST",
       "type": "CMD"
-        }
+      },
+      "helloWorld": {
+        "realization": "api/controllers/ActivityController.helloWorld",
+        "httpMethod":"GET",
+        "type":"CMD"
+      }
       }
     }
   }
