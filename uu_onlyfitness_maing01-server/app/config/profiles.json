@@ -64,6 +64,10 @@
       "activity/list": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "category/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
