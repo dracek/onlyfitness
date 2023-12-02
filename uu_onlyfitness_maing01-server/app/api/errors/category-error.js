@@ -10,6 +10,13 @@ const Create = {
             this.code = `${Create.UC_CODE}/invalidDtoIn`;
             this.messeage = `DtoIn is not valid.`
         }
+    },
+    CategoryDaoCreateFailed: class extends OnlyfitnessMainUseCaseError {
+        constructor() {
+            super(...arguments);
+            this.code = `${Create.UC_CODE}/categoryDaoCreateFailed`;
+            this.messeage = `Create category by category Dao created failed.`
+        }
     }
 }
 

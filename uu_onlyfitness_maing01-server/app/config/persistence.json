@@ -9,6 +9,9 @@
         },
         "userSetting": {
           "realization": "dao/UserSettingMongo"
+        },
+        "category": {
+          "realization": "dao/CategoryMongo"
         }
       }
     }
