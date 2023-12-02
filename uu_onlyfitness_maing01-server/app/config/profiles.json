@@ -45,10 +45,6 @@
         "sysStateList": ["active"],
         "profileList": ["Public"]
       },
-      "helloWorld": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
       "category/create": {
         "sysStateList": ["active"],
         "profileList": ["Public"]

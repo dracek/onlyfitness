@@ -51,11 +51,6 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
-      "helloWorld": {
-        "realization": "api/controllers/CategoryController.helloWorld",
-        "httpMethod":"GET",
-        "type":"CMD"
-      },
       "category/create": {
         "realization": "api/controllers/CategoryController.create",
         "httpMethod":"POST",
