@@ -1,24 +1,25 @@
 /* eslint-disable */
 
 const activityIdDtoInType = shape({
-    id: string().isRequired(),
+    id: id().isRequired(),
+});
+
+const activityListDtoInType = shape({
+    categoryId: string(),
+    from: date(),
+    to: date(),
+    pageInfo: shape({}, true) 
 });
 
 const activityCreateDtoInType = shape({
-    categoryId: string(255),
-    time: integer(1, 1440),
-    activityDate: date()
+    categoryId: string().isRequired(),
+    time: integer(1, 1440).isRequired(),
+    activityDate: date().isRequired()
 });
 
 const activityUpdateDtoInType = shape({
-    id: string().isRequired(),
-    categoryId: string(255),
+    id: id().isRequired(),
+    categoryId: string(),
     time: integer(1, 1440),
     activityDate: date()
 });
-
-// TODO:
-// update  { id: "123", categoryId: "789", date: "2023-11-19", length: 20 }
-// pro create totéž, ale bez ID
-// awid se dodává až v ABL
-

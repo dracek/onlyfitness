@@ -60,6 +60,10 @@
       "activity/update": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "activity/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

@@ -35,6 +35,10 @@ class ActivityMongo extends UuObjectDao {
     return await super.deleteOne(filter);
   }
 
+  async listByFilter(awid, filter, pageInfo = {}, sortBy = {}, projection = {}) {
+    return await super.find({ awid, ...filter}, pageInfo, sortBy, projection);
+  }
+
 }
 
 module.exports = ActivityMongo;

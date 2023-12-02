@@ -3,6 +3,10 @@ const ActivityAbl = require("../../abl/activity-abl.js");
 
 class ActivityController {
 
+  list(ucEnv) {
+    return ActivityAbl.list(ucEnv.getUri().getAwid(), ucEnv.getSession(), ucEnv.getDtoIn());
+  }
+
   update(ucEnv) {
     return ActivityAbl.update(ucEnv.getUri().getAwid(), ucEnv.getSession(), ucEnv.getDtoIn());
   }

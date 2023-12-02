@@ -38,7 +38,7 @@ const Create = {
   ActivityDaoCreateFailed: class extends OnlyfitnessMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}settingsDaoCreateFailed`;
+      this.code = `${Create.UC_CODE}activityDaoCreateFailed`;
       this.message = "Create failed.";
     }
   },
@@ -55,6 +55,22 @@ const Delete = {
       this.message = "DtoIn is not valid.";
     }
   },
+
+  ActivityNotPresent: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}activityNotPresent`;
+      this.message = "Cannot find activity";
+    }
+  },
+
+  NotOwner: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}notOwner`;
+      this.message = "Not owner of this activity";
+    }
+  },
   
 };
 
@@ -68,10 +84,56 @@ const Update = {
       this.message = "DtoIn is not valid.";
     }
   },
+
+  ActivityNotPresent: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}activityNotPresent`;
+      this.message = "Cannot find activity";
+    }
+  },
+
+  ActivityDaoUpdateFailed: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}activityDaoUpdateFailed`;
+      this.message = "Cannot find activity";
+    }
+  },
+
+  NotOwner: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}notOwner`;
+      this.message = "Not owner of this activity";
+    }
+  },
+  
+};
+
+const List = {
+  UC_CODE: `${ACTIVITY_ERROR_PREFIX}list/`,
+
+  InvalidDtoIn: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  ActivityDaoListFailed: class extends OnlyfitnessMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}activityDaoListFailed`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
   
 };
 
 module.exports = {
+  List,
   Update,
   Delete,
   Create,
