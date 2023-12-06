@@ -78,8 +78,28 @@
       },
       "category/create": {
         "realization": "api/controllers/CategoryController.create",
-        "httpMethod":"POST",
-        "type":"CMD"
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "category/get": {
+        "realization": "api/controllers/CategoryController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "category/update": {
+        "realization": "api/controllers/CategoryController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "category/delete": {
+        "realization": "api/controllers/CategoryController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "category/list": {
+        "realization": "api/controllers/CategoryController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

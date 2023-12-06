@@ -137,6 +137,7 @@ class ActivityAbl {
   }
 
   async delete(awid, session, dtoIn) {
+    
     const validationResult = this.validator.validate("activityIdDtoInType", dtoIn);
 
     let uuAppErrorMap = {};
