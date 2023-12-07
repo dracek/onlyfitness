@@ -4,8 +4,8 @@ import RouteBar from "../core/route-bar.js";
 import Timer from "../bricks/timer.js";
 
 
-import ActivityDataProvider from "../bricks/setting-data-provider.js";
-import Settings from "../bricks/settings.js";
+import ActivityDataProvider from "../bricks/activity-data-provider.js";
+import ActivityList from "../bricks/activity-list.js";
 import Config from "./config/config.js";
 import {useState} from "react";
 //@@viewOff:imports
@@ -27,7 +27,7 @@ const Css = {
 
 const Activity = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "Activity",
+  uu5Tag: Config.TAG + "ActivityList",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -50,19 +50,24 @@ const Activity = createVisualComponent({
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Activity);
+   
+    /*
     const [selectedPlan, setSelectedPlan] = useState('');
 
     const handlePlanSelect = (plan) => {
       console.log(`Selected plan: ${plan}`);
-      
-    };
+    
+        // todo add timer  
+
+    };*/
+
+
 
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
         <ActivityDataProvider>
-
-     <Timer />
+          <ActivityList />
         </ActivityDataProvider>
       </div>
     ) : null;

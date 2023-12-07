@@ -36,6 +36,8 @@ const ActivityDataProvider = createComponent({
 
     const { identity } = useSession();
     const [status, setStatus] = useState(STATUS_DONE);
+    const [activityData, setActivityData] = useState([]);
+    const [categoryData, setCategoryData] = useState([]);
     const [data, setData] = useState({});
     const { addAlert } = useAlertBus();
 
@@ -51,6 +53,32 @@ const ActivityDataProvider = createComponent({
         header: "Error",
         priority: "error",
       }, msg));
+    }
+
+    async function listActivities() {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.listActivities();
+        setActivityData(res.itemList);
+        setStatus(STATUS_DONE);
+      } catch (error) {
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot get activities.'})
+        //console.error("NOT GOOD", error);
+      }
+    }
+
+    async function listCategories() {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.listCategories();
+        setCategoryData(res.itemList);
+        setStatus(STATUS_DONE);
+      } catch (error) {
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot get categories.'})
+        //console.error("NOT GOOD", error);
+      }
     }
 
     async function getActivity() {
@@ -69,9 +97,11 @@ const ActivityDataProvider = createComponent({
     async function saveActivity(data) {
       try {
         setStatus(STATUS_WAITING);
-        let res = await Calls.saveActivity({ id: identity.uuIdentity, ...data });
+        let res = await Calls.saveActivity(data);
         setStatus(STATUS_DONE);
-        setData(res);
+        
+        listActivities();
+
         infoMsg({message: 'Successfully saved.'})
       } catch (error) {
         setStatus(STATUS_ERROR);
@@ -86,11 +116,14 @@ const ActivityDataProvider = createComponent({
 
     //@@viewOn:render
     const newValue = {
-      status: status, 
-      data,
+      status: status,
+      activityData, 
+      categoryData,
       callsMap: {
         getActivity,
-        saveActivity
+        saveActivity,
+        listCategories,
+        listActivities
       }
     };
 

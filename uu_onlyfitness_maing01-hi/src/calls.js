@@ -24,6 +24,20 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
+  listActivities(dtoIn) {
+    let commandUri = Calls.getCommandUri("activity/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  saveActivity(dtoIn) {
+    let commandUri = Calls.getCommandUri("activity/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  listCategories(dtoIn) {
+    let commandUri = Calls.getCommandUri("category/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
 
 
   
