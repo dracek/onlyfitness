@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const activityIdDtoInType = shape({
-    id: id().isRequired(),
+    id: string().isRequired(),
 });
 
 const activityListDtoInType = shape({

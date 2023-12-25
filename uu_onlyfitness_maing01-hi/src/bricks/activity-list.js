@@ -54,7 +54,7 @@ const ActivityList = (props) => {
     return (
       <div>
         <WelcomeRow>
-          Activity nadpis
+          <h1>Activity page</h1>
         </WelcomeRow>
 
         <WelcomeRow>

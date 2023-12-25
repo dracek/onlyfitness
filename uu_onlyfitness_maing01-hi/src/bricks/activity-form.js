@@ -71,10 +71,12 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
   const formik = useFormik({
 
     initialValues: {
-      categoryId: undefined, //categoryData.length > 0 ? categoryData[0].id : undefined, 
+      categoryId: categoryData.length > 0 ? categoryData[0].id : undefined, 
       activityDate: "2023-12-09", // todo now
       time: "10"
     },
+
+    enableReinitialize : true,
 
     validate: (values) => {
       const errors = {};
@@ -157,9 +159,6 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
         
         <button className={Css.button()} type="submit">
           Save
-        </button>
-        <button className={Css.button()} type="reset">
-          Cancel
         </button>
       </form>
     </div>

@@ -84,6 +84,26 @@
       "category/list": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "challenge/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "challenge/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "challenge/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "challenge/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "challenge/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

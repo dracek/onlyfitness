@@ -49,15 +49,10 @@ const UserProfile = (props) => {
   
     return (
       <div>
-        <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
+        <WelcomeRow>
           <Uu5Elements.Text category="story" segment="heading" type="h2" className={Css.colored()} style={{ alignItems: 'center' }}>
-            <Lsi import={importLsi} path={["Home", "welcome"]} />
+            User settings: {identity && identity.name}
           </Uu5Elements.Text>
-          {identity && (
-            <Uu5Elements.Text category="story" segment="heading" type="h2">
-              {identity.name}
-            </Uu5Elements.Text>
-          )}
         </WelcomeRow>
   
         {isEditing ? (

@@ -20,7 +20,20 @@ const Css = {
   colored: () => 
     Config.Css.css({
       color:'orange'
-  })  
+  }),
+
+  acts: () =>  
+  Config.Css.css({
+    color:'orange',
+    minHeight: "500px;",
+    "& div": {
+      marginBottom: "12px;"
+    }
+
+  }),
+
+  
+  
 };
 
 const ActivityTable = (props) => {
@@ -65,8 +78,8 @@ const ActivityTable = (props) => {
     }
 
     return (
-      <div>
-        {activityData.map(act => <div key={act.id}>{convertDate(act.activityDate)} ... {convertCat(act.categoryId)} ... {act.time} minutes</div>)}
+      <div className={Css.acts()} >
+        {activityData.map(act => <div key={act.id}>{convertDate(act.activityDate)} - {convertCat(act.categoryId)} ({act.time} minutes)</div>)}
       </div>
     );
   };

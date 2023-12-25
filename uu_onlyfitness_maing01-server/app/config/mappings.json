@@ -100,6 +100,31 @@
         "realization": "api/controllers/CategoryController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "challenge/get": {
+        "realization": "api/controllers/ChallengeController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "challenge/create": {
+        "realization": "api/controllers/ChallengeController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "challenge/update": {
+        "realization": "api/controllers/ChallengeController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "challenge/delete": {
+        "realization": "api/controllers/ChallengeController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "challenge/list": {
+        "realization": "api/controllers/ChallengeController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

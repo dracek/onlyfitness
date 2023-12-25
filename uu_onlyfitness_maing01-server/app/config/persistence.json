@@ -12,9 +12,12 @@
         },
         "activity": {
           "realization": "dao/ActivityMongo"
-        },  
+        },
         "category": {
           "realization": "dao/CategoryMongo"
+        },
+        "challenge": {
+          "realization": "dao/ChallengeMongo"
         }
       }
     }

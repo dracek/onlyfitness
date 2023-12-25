@@ -1,7 +1,7 @@
 "use strict";
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
-class ActivityMongo extends UuObjectDao {
+class ChallengeMongo extends UuObjectDao {
 
   async createSchema(){
     await super.createIndex({ awid: 1, id: 1 }, { unique: true });
@@ -36,9 +36,9 @@ class ActivityMongo extends UuObjectDao {
   }
 
   async listByFilter(awid, filter, pageInfo = {}, sortBy = {}, projection = {}) {
-    return await super.find({ }, pageInfo, sortBy, projection);
+    return await super.find({ awid, ...filter}, pageInfo, sortBy, projection);
   }
 
 }
 
-module.exports = ActivityMongo;
+module.exports = ChallengeMongo;

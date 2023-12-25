@@ -51,7 +51,7 @@ const Update = {
   InvalidDtoIn: class extends OnlyfitnessMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}invalidDtoIn`;
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
@@ -59,7 +59,7 @@ const Update = {
   CategoryNotPresent: class extends OnlyfitnessMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}categoryNotPresent`;
+      this.code = `${Update.UC_CODE}categoryNotPresent`;
       this.message = "Category not present.";
     }
   },
@@ -67,7 +67,7 @@ const Update = {
   CategoryDaoUpdateFailed: class extends OnlyfitnessMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}categoryDaoUpdateFailed`;
+      this.code = `${Update.UC_CODE}categoryDaoUpdateFailed`;
       this.message = "Category DAO update failed.";
     }
   },
