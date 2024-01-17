@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Timer.css"; 
+import "./Timer.css";
 
-function Timer() {
+function TimerClock({ onTimerStop }) {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [timerStarted, setTimerStarted] = useState(false);
   const timer = useRef();
 
-  //  load from local storage 
+  // Load from local storage 
   useEffect(() => {
     const savedTime = parseInt(localStorage.getItem("elapsedTime"), 10) || 0;
     const savedRunning = localStorage.getItem("timerRunning") === "true";
@@ -31,15 +31,14 @@ function Timer() {
 
   const startTimer = () => {
     timer.current = setInterval(() => {
-      setTime((prev) => prev + 10);
-    }, 10);
+      setTime((prev) => prev + 1000);
+    }, 1000);
   };
 
   const handleStartPauseClick = () => {
     if (running) {
       clearInterval(timer.current);
     } else {
-   
       if (!timerStarted) {
         setTime(0);
       }
@@ -54,7 +53,20 @@ function Timer() {
     clearInterval(timer.current);
     setRunning(false);
     setTimerStarted(false);
+    onTimerStop(time); // Call the passed function with the elapsed time
     setTime(0);
+  };
+
+  const format = (time) => {
+    let seconds = Math.floor(time / 1000 % 60);
+    let minutes = Math.floor((time / (1000 * 60)) % 60);
+    let hours = Math.floor(time / (1000 * 60 * 60));
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return `${hours}:${minutes}:${seconds}`;
   };
 
   return (
@@ -74,18 +86,4 @@ function Timer() {
   );
 }
 
-const format = (time) => {
-  let milliseconds = Math.floor(time % 1000);
-  let seconds = Math.floor((time / 1000) % 60);
-  let minutes = Math.floor((time / (1000 * 60)) % 60);
-  let hours = Math.floor(time / (1000 * 60 * 60));
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  milliseconds = milliseconds < 10 ? "0" + milliseconds : milliseconds;
-
-  return hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
-};
-
-export default Timer;
+export default TimerClock;

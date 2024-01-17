@@ -1,7 +1,6 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
 import RouteBar from "../core/route-bar.js";
-import Timer from "../bricks/timer.js";
 
 
 import ActivityDataProvider from "../bricks/activity-data-provider.js";
