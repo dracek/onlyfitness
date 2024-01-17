@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Config from "./config/config.js";
 import { useFormik } from 'formik';
 
@@ -64,7 +64,7 @@ const Css = {
     })    
 };
 
-const ActivityForm = ({ onCancel, onSave }) => {
+const ActivityForm = ({ onCancel, onSave, elapsedTime }) => {
   const predefinedCategories = [
     { id: 'Running', name: 'Running' },
     { id: 'Walking', name: 'Walking' },
@@ -76,7 +76,7 @@ const ActivityForm = ({ onCancel, onSave }) => {
     initialValues: {
       categoryId: predefinedCategories[0].id, 
       activityDate: "2023-12-09",
-      time: "10"
+      time: elapsedTime ? Math.floor(elapsedTime / 1000 / 60).toString() : "10" // Set initial time
     },
     enableReinitialize: true,
 
@@ -96,6 +96,18 @@ const ActivityForm = ({ onCancel, onSave }) => {
       });
     },
   });
+
+  useEffect(() => {
+    // Update the form's time field when elapsedTime changes
+    if (elapsedTime !== undefined) {
+      formik.setFieldValue('time', Math.floor(elapsedTime / 1000 / 60).toString());
+    }
+  }, [elapsedTime, formik]);
+
+  // ... rest of the component
+
+    
+  
 
   return (
 

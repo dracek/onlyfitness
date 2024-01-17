@@ -9,6 +9,7 @@ import Config from "./config/config.js";
 import ActivityContext from "./activity-context.js";
 import ActivityTable from "./activity-table";
 import ActivityForm from "./activity-form"
+import TimerClock from "./timer-clock.js";
 
 const Css = {
   profileInfo: () =>
@@ -49,6 +50,22 @@ const ActivityList = (props) => {
       setIsEditing(false);
     };
   
+    const handleTimerStop = (elapsedTime) => {
+      const activityDate = new Date().toISOString().split('T')[0];
+      const activityData = {
+          categoryId: selectedCategory,
+          activityDate,
+          time: elapsedTime,
+          userId: identity?.uuIdentity
+      };
+
+      callsMap.saveActivity(activityData).then(() => {
+          console.log("Activity saved successfully");
+      }).catch(error => {
+          console.error("Error saving activity:", error);
+      });
+  };
+
     const { identity } = useSession();
   
     return (
@@ -60,6 +77,8 @@ const ActivityList = (props) => {
         <WelcomeRow>
           <ActivityForm onCancel={handleCancel} onSave={handleSave} categoryData={categoryData} />
         </WelcomeRow>
+
+        
 
         <WelcomeRow>
           <ActivityTable />

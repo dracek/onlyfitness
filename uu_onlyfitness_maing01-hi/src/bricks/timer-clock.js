@@ -7,7 +7,14 @@ function TimerClock({ onTimerStop }) {
   const [timerStarted, setTimerStarted] = useState(false);
   const timer = useRef();
 
-  // Load from local storage 
+  // Start the timer
+  const startTimer = () => {
+    timer.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 1000);
+    }, 1000);
+  };
+
+  // Load from local storage
   useEffect(() => {
     const savedTime = parseInt(localStorage.getItem("elapsedTime"), 10) || 0;
     const savedRunning = localStorage.getItem("timerRunning") === "true";
@@ -20,21 +27,19 @@ function TimerClock({ onTimerStop }) {
     if (savedRunning && savedTimerStarted) {
       startTimer();
     }
+
+    // Clear interval on component unmount
+    return () => clearInterval(timer.current);
   }, []);
 
-  // Save the elapsed time to local storage 
+  // Save the elapsed time to local storage
   useEffect(() => {
     localStorage.setItem("elapsedTime", time.toString());
     localStorage.setItem("timerRunning", running.toString());
     localStorage.setItem("timerStarted", timerStarted.toString());
   }, [time, running, timerStarted]);
 
-  const startTimer = () => {
-    timer.current = setInterval(() => {
-      setTime((prev) => prev + 1000);
-    }, 1000);
-  };
-
+  // Handle start/pause click
   const handleStartPauseClick = () => {
     if (running) {
       clearInterval(timer.current);
@@ -49,29 +54,33 @@ function TimerClock({ onTimerStop }) {
     setTimerStarted(true);
   };
 
+  // Handle stop click
   const handleStopClick = () => {
     clearInterval(timer.current);
     setRunning(false);
     setTimerStarted(false);
-    onTimerStop(time); // Call the passed function with the elapsed time
+    if (onTimerStop) {
+      onTimerStop(time); // Call the passed function with the elapsed time
+    }
     setTime(0);
   };
 
-  const format = (time) => {
-    let seconds = Math.floor(time / 1000 % 60);
+  // Format the time display
+  const formatTime = (time) => {
+    let seconds = Math.floor((time / 1000) % 60);
     let minutes = Math.floor((time / (1000 * 60)) % 60);
     let hours = Math.floor(time / (1000 * 60 * 60));
 
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    hours = hours < 10 ? `0${hours}` : hours;
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
 
     return `${hours}:${minutes}:${seconds}`;
   };
 
   return (
     <div className="stopwatch">
-      {format(time)}
+      {formatTime(time)} {/* Here is the correction */}
       <div>
         <button className="start" onClick={handleStartPauseClick}>
           {running ? "Pause" : "Start"}
