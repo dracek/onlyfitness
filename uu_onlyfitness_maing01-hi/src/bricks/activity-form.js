@@ -64,43 +64,28 @@ const Css = {
     })    
 };
 
-const ActivityForm = ({ onCancel, onSave, categoryData }) => {
-
-  console.log(categoryData, "xyz");
+const ActivityForm = ({ onCancel, onSave }) => {
+  const predefinedCategories = [
+    { id: 'Running', name: 'Running' },
+    { id: 'Walking', name: 'Walking' },
+    { id: 'Swimming', name: 'Swimming' },
+    { id: 'Biking', name: 'Biking' }
+  ];
 
   const formik = useFormik({
-
     initialValues: {
-      categoryId: categoryData.length > 0 ? categoryData[0].id : undefined, 
-      activityDate: "2023-12-09", // todo now
+      categoryId: predefinedCategories[0].id, 
+      activityDate: "2023-12-09",
       time: "10"
     },
-
-    enableReinitialize : true,
+    enableReinitialize: true,
 
     validate: (values) => {
       const errors = {};
-
-      /*
-
-      // Validation for weight
-      const weight = parseInt(values.weight, 10);
-      if (isNaN(weight) || weight < 30 || weight > 300) {
-        errors.weight = "Are you sure about the weight? Our range is only between 30 and 300 kg.";
-      }
-
-      // Validation for height
-      const height = parseInt(values.height, 10);
-      if (isNaN(height) || height < 110 || height > 240) {
-        errors.height = "Are you sure about the height? Our range is only between 110 and 240 cm.";
-      }
-      */
-
       const time = parseInt(values.time, 10);
       if (isNaN(time) || time < 1 || time > 1440) {
         errors.time = "Time is allowed only between 1 and 1440 minutes";
       }
-
       return errors;
     },
     onSubmit: (values) => {
@@ -113,22 +98,23 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
   });
 
   return (
-    <div className={Css.main()}>
-      <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
 
-        <div>
-          <label for={"categoryId"}>Category:</label>
-          <select
-            name="categoryId"
-            value={formik.values.categoryId}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            className={Css.select()}
-            placeholder="Select Category"
-          >
-            {categoryData.map(cat => <option value={cat.id}>{cat.name}</option>)}
-          </select>
-        </div>
+      <div className={Css.main()}>
+        <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
+          <div>
+            <label htmlFor={"categoryId"}>Category:</label>
+            <select
+              name="categoryId"
+              value={formik.values.categoryId}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={Css.select()}
+            >
+              {predefinedCategories.map(cat => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
+          </div>
 
         <div>
           <label for={"activityDate"}>Date:</label>
