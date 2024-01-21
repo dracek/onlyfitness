@@ -1,5 +1,5 @@
 import React from 'react';
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 import { useFormik } from 'formik';
 
 const Css = {
@@ -64,16 +64,16 @@ const Css = {
     })    
 };
 
-const ActivityForm = ({ onCancel, onSave, categoryData }) => {
-
-  console.log(categoryData, "xyz");
+const ChallengeForm = ({ onCancel, onSave, categoryData, data }) => {
 
   const formik = useFormik({
 
-    initialValues: {
+    initialValues: data ? {
+      categoryId: data.categoryId,
+      time: data.value
+    } : {
       categoryId: categoryData.length > 0 ? categoryData[0].id : undefined, 
-      activityDate: "2023-12-09", // todo now
-      time: "10"
+      time: "1"
     },
 
     enableReinitialize : true,
@@ -97,17 +97,17 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
       */
 
       const time = parseInt(values.time, 10);
-      if (isNaN(time) || time < 1 || time > 1440) {
-        errors.time = "Time is allowed only between 1 and 1440 minutes";
+      if (isNaN(time) || time < 1 || time > 999) {
+        errors.time = "Time is allowed only between 1 and 999";
       }
 
       return errors;
     },
+
     onSubmit: (values) => {
       onSave({
         categoryId: values.categoryId,
-        activityDate: values.activityDate,
-        time: parseInt(values.time, 10),
+        value: parseInt(values.time, 10),
       });
     },
   });
@@ -116,8 +116,8 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
     <div className={Css.main()}>
       <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
 
-        <div>
-          <label for={"categoryId"}>Category:</label>
+        <div key="category">
+          <label htmlFor={"categoryId"}>Category:</label>
           <select
             name="categoryId"
             value={formik.values.categoryId}
@@ -126,25 +126,12 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
             className={Css.select()}
             placeholder="Select Category"
           >
-            {categoryData.map(cat => <option value={cat.id}>{cat.name}</option>)}
+            {categoryData.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
           </select>
         </div>
 
-        <div>
-          <label for={"activityDate"}>Date:</label>
-          <input
-            type="string"
-            name="activityDate"
-            value={formik.values.activityDate}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            className={formik.errors.activityDate ? Css.inputError() : Css.input()}
-          />
-        </div>
-        {formik.errors.activityDate && <div className={Css.errorMessage()} >{formik.errors.activityDate}</div>}
-
-        <div>
-          <label for={"time"}>Time:</label>
+        <div key="time">
+          <label htmlFor={"time"}>Time:</label>
           <input
             type="number"
             name="time"
@@ -152,17 +139,21 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.time ? Css.inputError() : Css.input()}
-          />{"minutes"}
+          />{"hours"}
         </div>
         {formik.errors.time && <div className={Css.errorMessage()} >{formik.errors.time}</div>}
 
-        
-        <button className={Css.button()} type="submit">
-          Save
-        </button>
+        <div key="buttons">
+          <button key="submit" className={Css.button()} type="submit">
+            Save
+          </button>
+          <button key="reset" className={Css.button()} type="reset">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default ActivityForm;
+export default ChallengeForm;

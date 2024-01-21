@@ -1,12 +1,15 @@
 import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
 import React, { useEffect, useState, useContext } from 'react';
-import UserProfileForm from './user-profile-form';
-import WelcomeRow from './welcome-row';
+import UserProfileForm from '../user-profile-form';
+import WelcomeRow from '../welcome-row';
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
-import importLsi from "../lsi/import-lsi.js";
-import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi.js";
+import Config from "../config/config.js";
 import ActivityContext from "./activity-context.js";
+import ActivityRow from "./activity-row.js";
+
+import ConfirmModal from "../confirm-modal";
 
 const Css = {
   profileInfo: () =>
@@ -40,7 +43,8 @@ const ActivityTable = (props) => {
 
     const { callsMap, activityData, categoryData }  = useContext(ActivityContext);
 
-    
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [currentId, setCurrentId] = useState(undefined);
 
     /*
 
@@ -67,19 +71,28 @@ const ActivityTable = (props) => {
   
     */
 
-    function convertDate(date){
-      let d = new Date(date);
-      return d.toLocaleDateString('cs-cz');
+    const onDeleteClick = (id) => {
+      setCurrentId(id);
+      setShowDeleteConfirm(true);
     }
 
-    function convertCat(categoryId){
-      const cat = categoryData.find(c => c.id === categoryId);
-      return cat ? cat.name : "unknown";
-    }
+    const handleDeleteSubmit = () => {
+      callsMap.deleteActivity(currentId);
+      setCurrentId(undefined);
+      setShowDeleteConfirm(false);
+    };
+
+    const handleDeleteCancel = () => {
+      setCurrentId(undefined);
+      setShowDeleteConfirm(false);
+    };
+
+    const confirmHeader = "Really delete this activity?";
 
     return (
       <div className={Css.acts()} >
-        {activityData.map(act => <div key={act.id}>{convertDate(act.activityDate)} - {convertCat(act.categoryId)} ({act.time} minutes)</div>)}
+        {activityData.map(act => <ActivityRow key={act.id} data={act} onDelete = {onDeleteClick} />)}
+        <ConfirmModal open={showDeleteConfirm} header={confirmHeader} onSubmit={handleDeleteSubmit} onClose={handleDeleteCancel} />
       </div>
     );
   };

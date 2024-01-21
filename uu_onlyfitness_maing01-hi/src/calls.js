@@ -34,9 +34,34 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
+  deleteActivity(dtoIn) {
+    let commandUri = Calls.getCommandUri("activity/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   listCategories(dtoIn) {
     let commandUri = Calls.getCommandUri("category/list");
     return Calls.call("get", commandUri, dtoIn);
+  },
+
+  listChallenges(dtoIn) {
+    let commandUri = Calls.getCommandUri("challenge/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  saveChallenge(dtoIn) {
+    let commandUri = Calls.getCommandUri("challenge/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  editChallenge(dtoIn) {
+    let commandUri = Calls.getCommandUri("challenge/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  deleteChallenge(dtoIn) {
+    let commandUri = Calls.getCommandUri("challenge/delete");
+    return Calls.call("post", commandUri, dtoIn);
   },
 
 

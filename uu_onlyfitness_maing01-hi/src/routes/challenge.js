@@ -1,13 +1,12 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
+
+import ChallengeDataProvider from "../bricks/challenge/challenge-data-provider.js";
+import ChallengeList from "../bricks/challenge/challenge-list.js";
+
 import RouteBar from "../core/route-bar.js";
-import Timer from "../bricks/timer.js";
-
-
-import ActivityDataProvider from "../bricks/activity/activity-data-provider.js";
-import ActivityList from "../bricks/activity/activity-list.js";
 import Config from "./config/config.js";
-import {useState} from "react";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -25,9 +24,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const Activity = createVisualComponent({
+const Challenge = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "ActivityList",
+  uu5Tag: Config.TAG + "Challenge",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -49,32 +48,20 @@ const Activity = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Activity);
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Challenge);
    
-    /*
-    const [selectedPlan, setSelectedPlan] = useState('');
-
-    const handlePlanSelect = (plan) => {
-      console.log(`Selected plan: ${plan}`);
-    
-        // todo add timer  
-
-    };*/
-
-
-
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
-        <ActivityDataProvider>
-          <ActivityList />
-        </ActivityDataProvider>
+        <ChallengeDataProvider>
+          <ChallengeList />
+        </ChallengeDataProvider>
       </div>
     ) : null;
   },
 });
 
 //@@viewOn:exports
-export { Activity };
-export default Activity;
+export { Challenge };
+export default Challenge;
 //@@viewOff:exports

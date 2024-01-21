@@ -1,9 +1,9 @@
 //@@viewOn:imports
 import { createComponent, useSession, useState } from "uu5g05";
 import { Children, cloneElement } from "react";
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 import Calls from "calls";
-import ActivityContext from "./activity-context.js";
+import ChallengeContext from "./challenge-context.js";
 import { useAlertBus } from "uu5g05-elements";
 //@@viewOff:imports
 
@@ -17,9 +17,9 @@ const STATUS_DONE = "DONE";
 const STATUS_WAITING = "WAITING";
 const STATUS_ERROR = "ERROR";
 
-const ActivityDataProvider = createComponent({
+const ChallengeDataProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "ActivityDataProvider",
+  uu5Tag: Config.TAG + "ChallengeDataProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -36,7 +36,7 @@ const ActivityDataProvider = createComponent({
 
     const { identity } = useSession();
     const [status, setStatus] = useState(STATUS_DONE);
-    const [activityData, setActivityData] = useState([]);
+    const [challengeData, setChallengeData] = useState([]);
     const [categoryData, setCategoryData] = useState([]);
     const [data, setData] = useState({});
     const { addAlert } = useAlertBus();
@@ -55,19 +55,6 @@ const ActivityDataProvider = createComponent({
       }, msg));
     }
 
-    async function listActivities() {
-      try {
-        setStatus(STATUS_WAITING);
-        let res = await Calls.listActivities();
-        setActivityData(res.itemList);
-        setStatus(STATUS_DONE);
-      } catch (error) {
-        setStatus(STATUS_ERROR);
-        alertMsg({message: 'Cannot get activities.'})
-        //console.error("NOT GOOD", error);
-      }
-    }
-
     async function listCategories() {
       try {
         setStatus(STATUS_WAITING);
@@ -77,38 +64,59 @@ const ActivityDataProvider = createComponent({
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot get categories.'})
-        //console.error("NOT GOOD", error);
       }
     }
 
-    async function getActivity() {
+    async function listChallenges() {
       try {
         setStatus(STATUS_WAITING);
-        let res = await Calls.getActivity({ id: identity.uuIdentity });
+        let res = await Calls.listChallenges();
+        setChallengeData(res.itemList);
         setStatus(STATUS_DONE);
-        setData(res);
       } catch (error) {
         setStatus(STATUS_ERROR);
-        alertMsg({message: 'Cannot get activity.'})
-        //console.error("NOT GOOD", error);
+        alertMsg({message: 'Cannot get challenges.'})
       }
     }
 
-    async function saveActivity(data) {
+    async function saveChallenge(data) {
       try {
         setStatus(STATUS_WAITING);
-        let res = await Calls.saveActivity(data);
+        let res = await Calls.saveChallenge(data);
         setStatus(STATUS_DONE);
-        
-        listActivities();
-
         infoMsg({message: 'Successfully saved.'})
       } catch (error) {
         setStatus(STATUS_ERROR);
-        alertMsg({message: 'Cannot save activity.'})
-        //console.error("NOT GOOD", error);
+        alertMsg({message: 'Cannot save challenge.'})
       }
+      listChallenges();
     }
+
+    async function editChallenge(data) {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.editChallenge(data);
+        setStatus(STATUS_DONE);
+        infoMsg({message: 'Successfully edited.'})
+      } catch (error) {
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot edit challenge.'})
+      }
+      listChallenges();
+    }
+
+    async function deleteChallenge(id) {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.deleteChallenge({ id: id });
+        setStatus(STATUS_DONE);
+      } catch (error) {
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot delete challenge.'})
+      }
+      listChallenges();
+    }
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -117,25 +125,26 @@ const ActivityDataProvider = createComponent({
     //@@viewOn:render
     const newValue = {
       status: status,
-      activityData, 
+      challengeData, 
       categoryData,
       callsMap: {
-        getActivity,
-        saveActivity,
         listCategories,
-        listActivities
+        listChallenges,
+        saveChallenge,
+        editChallenge,
+        deleteChallenge
       }
     };
 
-    return (<ActivityContext.Provider value={ newValue }>
+    return (<ChallengeContext.Provider value={ newValue }>
       {children}
-    </ActivityContext.Provider>);
+    </ChallengeContext.Provider>);
 
     //@@viewOff:render
   },
 });
 
 //@@viewOn:exports
-export { ActivityDataProvider };
-export default ActivityDataProvider;
+export { ChallengeDataProvider };
+export default ChallengeDataProvider;
 //@@viewOff:exports

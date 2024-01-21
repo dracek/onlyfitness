@@ -1,11 +1,11 @@
 import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
 import React, { useEffect, useState, useContext } from 'react';
-import UserProfileForm from './user-profile-form';
-import WelcomeRow from './welcome-row';
+import UserProfileForm from '../user-profile-form';
+import WelcomeRow from '../welcome-row';
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
-import importLsi from "../lsi/import-lsi.js";
-import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi.js";
+import Config from "../config/config.js";
 import ActivityContext from "./activity-context.js";
 import ActivityTable from "./activity-table";
 import ActivityForm from "./activity-form"
@@ -64,21 +64,6 @@ const ActivityList = (props) => {
         <WelcomeRow>
           <ActivityTable />
         </WelcomeRow>
-  
-        {/*isEditing ? (
-          <UserProfileForm onSave={handleSave} onCancel={handleCancel} data={data} />
-        ) : (
-          <div className={Css.profileInfo()} >
-            <p>Gender: <span className={Css.colored()}>{data.gender} </span></p>
-            <p>Height: <span className={Css.colored()}>{data.height}</span> cm</p>
-            <p>Weight: <span className={Css.colored()}>{data.weight}</span> kg</p>
-            <p>Age: <span className={Css.colored()}>{data.age}</span> years</p>
-
-            <button style={{ width: '120px', padding: '7px', borderRadius: '20px', backgroundColor: 'orange', color: 'black', margin:'25px' }} onClick={handleEdit}>
-              Edit
-            </button>
-          </div>
-        )*/}
       </div>
     );
   };

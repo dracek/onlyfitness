@@ -11,6 +11,7 @@ import UserSettings from "../routes/user-setting.js";
 
 //@@viewOn:constants
 const Activity = Utils.Component.lazy(() => import("../routes/activity.js"));
+const Challenge = Utils.Component.lazy(() => import("../routes/challenge.js"));
 const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
@@ -19,6 +20,8 @@ const ROUTE_MAP = {
   home: (props) => <Home {...props} />,
   settings: (props) => <UserSettings {...props} />,
   activity: (props) => <Activity {...props} />,
+  challenge: (props) => <Challenge {...props} />,
+
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

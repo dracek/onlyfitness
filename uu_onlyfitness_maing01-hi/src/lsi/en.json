@@ -29,6 +29,7 @@
   "Menu": {
     "home": "Hoem",
     "settings": "Settings",
-    "activity": "Activity"
+    "activity": "Activity",
+    "challenge": "Challenge"
   }
 }
