@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 const Css = {
   main: () => 
     Config.Css.css({
-      height: '100vh'
   }),
 
   form: () => 

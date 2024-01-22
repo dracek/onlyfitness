@@ -1,20 +1,33 @@
-import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
+import { Utils, useSession } from "uu5g05";
 import React, { useEffect, useState, useContext } from 'react';
 import UserProfileForm from './user-profile-form';
-import WelcomeRow from './welcome-row';
-import Uu5Elements from "uu5g05-elements";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
-import importLsi from "../lsi/import-lsi.js";
 import Config from "./config/config.js";
 import SettingsContext from "./settings-context.js";
 
 const Css = {
+  main: () =>
+  Config.Css.css({
+    display: "flex",
+    maxWidth: 624,
+    minWidth: 480,
+    padding: "24px",
+    margin: "0 auto",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    color: "white",
+    "& > *": {
+      display: "block",
+      width: "100%"
+    }
+  }),
   profileInfo: () =>
     Config.Css.css({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      height:'100vh'
+      "& > *": {
+        margin: "12px;"
+      }
     }),
   
   colored: () => 
@@ -46,14 +59,14 @@ const UserProfile = (props) => {
     };
   
     const { identity } = useSession();
+
+    const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
   
     return (
-      <div>
-        <WelcomeRow>
-          <Uu5Elements.Text category="story" segment="heading" type="h2" className={Css.colored()} style={{ alignItems: 'center' }}>
-            User settings: {identity && identity.name}
-          </Uu5Elements.Text>
-        </WelcomeRow>
+      <div {...attrs}>
+        <h1 style={{justifyContent: "space-around", display: "flex"}}>
+            <span>User settings: {identity && identity.name}</span>
+        </h1>
   
         {isEditing ? (
           <UserProfileForm onSave={handleSave} onCancel={handleCancel} data={data} />

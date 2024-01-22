@@ -30,7 +30,18 @@ const Css = {
       "& div": {
         marginBottom: "12px;"
       }
-  }),  
+  }),
+  createButton: () =>  
+    Config.Css.css({
+      margin: "25px",
+      "& button": {
+        color: "white",
+        padding: "25px",
+        "&:hover": {
+          color:'orange',
+        }
+      }
+    }),
 };
 
 const ActivityList = (props) => {
@@ -110,7 +121,7 @@ const ActivityList = (props) => {
 
         <h1>Activity page</h1>
 
-        <div>
+        <div className={Css.createButton()}>
           <Button onClick={onCreateClick}>create new activity</Button>
         </div>
 

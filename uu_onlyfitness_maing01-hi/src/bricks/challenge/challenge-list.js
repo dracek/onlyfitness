@@ -1,16 +1,11 @@
-import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
+import { Utils } from "uu5g05";
 import React, { useEffect, useState, useContext } from 'react';
-import WelcomeRow from '../welcome-row';
-import Uu5Elements from "uu5g05-elements";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
-import importLsi from "../../lsi/import-lsi.js";
 import Config from "../config/config.js";
-import { Modal } from "uu5g05-elements";
+import { Modal, Button } from "uu5g05-elements";
 
 import ChallengeContext from "./challenge-context";
 import ChallengeRow from "./challenge-row";
 import ConfirmModal from "../confirm-modal";
-
 import ChallengeForm from "./challenge-form";
 
 
@@ -19,18 +14,40 @@ function filterUsedCategories (categoryData, usedIds, currentItem) {
 }
 
 const Css = {
-  profileInfo: () =>
+  main: () =>
     Config.Css.css({
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      height:'100vh'
+      display: "flex",
+      maxWidth: 624,
+      minWidth: 480,
+      padding: "24px",
+      margin: "0 auto",
+      flexWrap: "wrap",
+      flexDirection: "column",
+      color: "white",
+      "& > *": {
+        display: "block",
+        width: "100%"
+      }
     }),
-  
-  colored: () => 
+  challenges: () =>  
     Config.Css.css({
-      color:'orange'
-  })  
+      color:'orange',
+      minHeight: "500px;",
+      "& div": {
+        marginBottom: "12px;"
+      }
+  }),
+  createButton: () =>  
+    Config.Css.css({
+      margin: "25px",
+      "& button": {
+        color: "white",
+        padding: "25px",
+        "&:hover": {
+          color:'orange',
+        }
+      }
+    }),    
 };
 
 const ChallengeList = (props) => {
@@ -108,23 +125,24 @@ const ChallengeList = (props) => {
     const availableCategories = filterUsedCategories(categoryData, usedCategories);
     const availableEditCategories = filterUsedCategories(categoryData, usedCategories, currentItem);
 
+    const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
+
     return (
-      <div>
-        <WelcomeRow>
-          <h1>Challenge page</h1>
-        </WelcomeRow>
+      <div {...attrs}>
 
-        <WelcomeRow>
-          { (availableCategories.length > 0) ? <p onClick={onCreateClick}>create new challenge</p> : <p>no available category</p>}
-        </WelcomeRow>
+        <h1>Challenge page</h1>
 
-        {!noData && <WelcomeRow>
+        <div className={Css.createButton()}>
+          {(availableCategories.length > 0) ? <Button onClick={onCreateClick}>create new challenge</Button> : <p>all categories occupied</p>}
+        </div>
+
+        {!noData && <div className={Css.challenges()} >
           {challengeData.map(ch => <ChallengeRow key={ch.id} data={ch} onDelete = {onDeleteClick} onEdit={onEditClick} />)}
-        </WelcomeRow>}
+        </div>}
 
-        {noData && <WelcomeRow>
-          No data, sorry
-        </WelcomeRow>}
+        {noData && <div>
+          No challenges yet :(
+        </div>}
 
         <ConfirmModal open={showDeleteConfirm} header={confirmHeader} onSubmit={handleDeleteSubmit} onClose={handleDeleteCancel} />
 

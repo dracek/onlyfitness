@@ -15,8 +15,6 @@ import Config from "./config/config.js";
 //@@viewOn:css
 const Css = {
   main: () => Config.Css.css({
-    backgroundColor:'black',
-    color:'white'
   }),
 };
 //@@viewOff:css
