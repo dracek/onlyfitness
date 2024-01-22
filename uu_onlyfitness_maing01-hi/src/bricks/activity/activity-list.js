@@ -9,6 +9,7 @@ import Config from "../config/config.js";
 import ActivityContext from "./activity-context.js";
 import ActivityTable from "./activity-table";
 import ActivityForm from "./activity-form"
+import { Modal } from "uu5g05-elements";
 
 const Css = {
   profileInfo: () =>
@@ -28,28 +29,53 @@ const Css = {
 const ActivityList = (props) => {
     const { callsMap, activityData, categoryData }  = useContext(ActivityContext);
 
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const [currentItem, setCurrentItem] = useState(undefined);
+
     useEffect(() => {
       callsMap.listCategories();
       callsMap.listActivities();
     }, []);
 
-    const [isEditing, setIsEditing] = useState(false);
+    // create
 
-    const handleEdit = () => {
-      setIsEditing(true);
-    };
-  
-    const handleSave = (data) => {
-      console.log("SAVE", data);
+    const onCreateClick = () => {
+      setShowCreateModal(true);
+    }
+
+    const handleCreateSubmit = (data) => {
       callsMap.saveActivity(data);
-      setIsEditing(false);
+      setShowCreateModal(false);
     };
 
-    const handleCancel = () => {
-      setIsEditing(false);
+    const handleCreateCancel = () => {
+        setShowCreateModal(false);
+    };
+
+    // create
+
+    const onEditClick = (item) => {
+      setCurrentItem(item);
+      setShowEditModal(true);
+    }
+
+    const handleEditSubmit = (data) => {
+      callsMap.editActivity({...data, id: currentItem.id});
+      setShowEditModal(false);
+      setCurrentItem(undefined);
+    };
+
+    const handleEditCancel = () => {
+      setShowEditModal(false);
+      setCurrentItem(undefined);
     };
   
     const { identity } = useSession();
+
+    const createHeader = "Create activity";
+    const editHeader = "Edit activity";
   
     return (
       <div>
@@ -58,12 +84,29 @@ const ActivityList = (props) => {
         </WelcomeRow>
 
         <WelcomeRow>
-          <ActivityForm onCancel={handleCancel} onSave={handleSave} categoryData={categoryData} />
+          <p onClick={onCreateClick}>create new activity</p>
         </WelcomeRow>
 
         <WelcomeRow>
-          <ActivityTable />
+          <ActivityTable onEditClick={onEditClick}/>
         </WelcomeRow>
+
+        <Modal
+          header={createHeader}
+          open={showCreateModal}
+          onClose={handleCreateCancel}
+          collapsible={false}
+          children={<ActivityForm onCancel={handleCreateCancel} onSave={handleCreateSubmit} categoryData={categoryData} />}
+        />
+
+        <Modal
+          header={editHeader}
+          open={showEditModal}
+          onClose={handleEditCancel}
+          collapsible={false}
+          children={<ActivityForm data={currentItem} onCancel={handleEditCancel} onSave={handleEditSubmit} categoryData={categoryData} />}
+        />
+
       </div>
     );
   };

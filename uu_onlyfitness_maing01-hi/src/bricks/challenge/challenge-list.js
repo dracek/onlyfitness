@@ -47,9 +47,6 @@ const ChallengeList = (props) => {
       callsMap.listChallenges();
     }, []);
 
-    //const { identity } = useSession();
-
-
     // delete
 
     const onDeleteClick = (id) => {

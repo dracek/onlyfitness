@@ -64,15 +64,17 @@ const Css = {
     })    
 };
 
-const ActivityForm = ({ onCancel, onSave, categoryData }) => {
-
-  //console.log(categoryData, "xyz");
+const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
 
   const formik = useFormik({
 
-    initialValues: {
+    initialValues: data ? {
+      categoryId: data.categoryId, 
+      activityDate: new Date(data.activityDate).toISOString().substring(0,10),
+      time: data.time
+    } : {
       categoryId: categoryData.length > 0 ? categoryData[0].id : undefined, 
-      activityDate: "2024-01-19", // todo now
+      activityDate: new Date(Date.now()).toISOString().substring(0,10),
       time: "10"
     },
 
@@ -80,21 +82,6 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
 
     validate: (values) => {
       const errors = {};
-
-      /*
-
-      // Validation for weight
-      const weight = parseInt(values.weight, 10);
-      if (isNaN(weight) || weight < 30 || weight > 300) {
-        errors.weight = "Are you sure about the weight? Our range is only between 30 and 300 kg.";
-      }
-
-      // Validation for height
-      const height = parseInt(values.height, 10);
-      if (isNaN(height) || height < 110 || height > 240) {
-        errors.height = "Are you sure about the height? Our range is only between 110 and 240 cm.";
-      }
-      */
 
       const time = parseInt(values.time, 10);
       if (isNaN(time) || time < 1 || time > 1440) {
@@ -117,7 +104,7 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
       <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
 
         <div>
-          <label for={"categoryId"}>Category:</label>
+          <label htmlFor={"categoryId"}>Category:</label>
           <select
             name="categoryId"
             value={formik.values.categoryId}
@@ -126,12 +113,12 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
             className={Css.select()}
             placeholder="Select Category"
           >
-            {categoryData.map(cat => <option value={cat.id}>{cat.name}</option>)}
+            {categoryData.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
           </select>
         </div>
 
         <div>
-          <label for={"activityDate"}>Date:</label>
+          <label htmlFor={"activityDate"}>Date:</label>
           <input
             type="string"
             name="activityDate"
@@ -144,7 +131,7 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
         {formik.errors.activityDate && <div className={Css.errorMessage()} >{formik.errors.activityDate}</div>}
 
         <div>
-          <label for={"time"}>Time:</label>
+          <label htmlFor={"time"}>Time:</label>
           <input
             type="number"
             name="time"
@@ -156,10 +143,14 @@ const ActivityForm = ({ onCancel, onSave, categoryData }) => {
         </div>
         {formik.errors.time && <div className={Css.errorMessage()} >{formik.errors.time}</div>}
 
-        
-        <button className={Css.button()} type="submit">
-          Save
-        </button>
+        <div>
+          <button className={Css.button()} type="reset">
+            Cancel
+          </button>
+          <button className={Css.button()} type="submit">
+            Save
+          </button>
+        </div>  
       </form>
     </div>
   );

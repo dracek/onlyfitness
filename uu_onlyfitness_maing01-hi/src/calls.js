@@ -34,6 +34,11 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
+  editActivity(dtoIn) {
+    let commandUri = Calls.getCommandUri("activity/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   deleteActivity(dtoIn) {
     let commandUri = Calls.getCommandUri("activity/delete");
     return Calls.call("post", commandUri, dtoIn);

@@ -38,7 +38,6 @@ const ActivityDataProvider = createComponent({
     const [status, setStatus] = useState(STATUS_DONE);
     const [activityData, setActivityData] = useState([]);
     const [categoryData, setCategoryData] = useState([]);
-    const [data, setData] = useState({});
     const { addAlert } = useAlertBus();
 
     function infoMsg(msg){
@@ -100,11 +99,11 @@ const ActivityDataProvider = createComponent({
         let res = await Calls.deleteActivity({ id: id });
         setStatus(STATUS_DONE);
         //setData(res);
-        listActivities(); // todo list with filter
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot delete activity.'})
       }
+      listActivities(); // todo list with filter
     }
 
     async function saveActivity(data) {
@@ -112,15 +111,26 @@ const ActivityDataProvider = createComponent({
         setStatus(STATUS_WAITING);
         let res = await Calls.saveActivity(data);
         setStatus(STATUS_DONE);
-        
-        listActivities();
-
         infoMsg({message: 'Successfully saved.'})
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot save activity.'})
         //console.error("NOT GOOD", error);
       }
+      listActivities();
+    }
+
+    async function editActivity(data) {
+      try {
+        setStatus(STATUS_WAITING);
+        let res = await Calls.editActivity(data);
+        setStatus(STATUS_DONE);
+        infoMsg({message: 'Successfully edited.'})
+      } catch (error) {
+        setStatus(STATUS_ERROR);
+        alertMsg({message: 'Cannot edit activity.'})
+      }
+      listActivities();
     }
     //@@viewOff:private
 
@@ -135,6 +145,7 @@ const ActivityDataProvider = createComponent({
       callsMap: {
         getActivity,
         saveActivity,
+        editActivity,
         deleteActivity,
         listCategories,
         listActivities

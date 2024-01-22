@@ -46,30 +46,6 @@ const ActivityTable = (props) => {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [currentId, setCurrentId] = useState(undefined);
 
-    /*
-
-    useEffect(() => {
-      callsMap.getUserSetting();
-    }, []);
-
-    const [isEditing, setIsEditing] = useState(false);
-
-    const handleEdit = () => {
-      setIsEditing(true);
-    };
-  
-    const handleSave = (data) => {
-      callsMap.saveUserSetting(data);
-      setIsEditing(false);
-    };
-
-    const handleCancel = () => {
-      setIsEditing(false);
-    };
-  
-    const { identity } = useSession();
-  
-    */
 
     const onDeleteClick = (id) => {
       setCurrentId(id);
@@ -91,7 +67,8 @@ const ActivityTable = (props) => {
 
     return (
       <div className={Css.acts()} >
-        {activityData.map(act => <ActivityRow key={act.id} data={act} onDelete = {onDeleteClick} />)}
+        {activityData.map(act => <ActivityRow key={act.id} data={act} onDelete = {onDeleteClick} onEdit={() => props.onEditClick(act)} />)}
+
         <ConfirmModal open={showDeleteConfirm} header={confirmHeader} onSubmit={handleDeleteSubmit} onClose={handleDeleteCancel} />
       </div>
     );
