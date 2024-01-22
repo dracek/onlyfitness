@@ -103,7 +103,7 @@ const ActivityDataProvider = createComponent({
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot delete activity.'})
       }
-      listActivities(); // todo list with filter
+      listActivities(); // todo list with filter!
     }
 
     async function saveActivity(data) {

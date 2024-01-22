@@ -1,13 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import RouteBar from "../core/route-bar.js";
-import Timer from "../bricks/timer.js";
-
-
 import ActivityDataProvider from "../bricks/activity/activity-data-provider.js";
 import ActivityList from "../bricks/activity/activity-list.js";
 import Config from "./config/config.js";
-import {useState} from "react";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -15,10 +11,9 @@ import {useState} from "react";
 
 //@@viewOn:css
 const Css = {
-  main: () => Config.Css.css({
-    backgroundColor:'black',
-    color:'white'
-  }),
+  main: () =>
+    Config.Css.css({
+    }),
 };
 //@@viewOff:css
 
@@ -50,18 +45,6 @@ const Activity = createVisualComponent({
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Activity);
-   
-    /*
-    const [selectedPlan, setSelectedPlan] = useState('');
-
-    const handlePlanSelect = (plan) => {
-      console.log(`Selected plan: ${plan}`);
-    
-        // todo add timer  
-
-    };*/
-
-
 
     return currentNestingLevel ? (
       <div {...attrs}>

@@ -1,3 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+body > * {
+  flex-shrink: 0;
+}
+#uuApp {
+  background-color: black;
+  flex-grow: 1;
+}
+
 .uu-app-loading {
   position: fixed;
   top: 0;
