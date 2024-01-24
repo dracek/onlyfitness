@@ -36,7 +36,7 @@ class ActivityMongo extends UuObjectDao {
   }
 
   async listByFilter(awid, filter, pageInfo = {}, sortBy = {}, projection = {}) {
-    return await super.find({ }, pageInfo, sortBy, projection);
+    return await super.find({ ... filter, awid }, pageInfo, sortBy, projection);
   }
 
 }

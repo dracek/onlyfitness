@@ -34,7 +34,7 @@ class OnlyfitnessMainAbl {
     );
 
     // HDS 2
-    const schemas = ["onlyfitnessMain"];
+    const schemas = ["onlyfitnessMain"];                                   // todo init!!!!!!!!!!!!!!!!!!!
     let schemaCreateResults = schemas.map(async (schema) => {
       try {
         return await DaoFactory.getDao(schema).createSchema();

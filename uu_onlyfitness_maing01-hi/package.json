@@ -8,6 +8,7 @@
   "spec": "uu5-app; uu_appg01_devkit@5.15.4",
   "dependencies": {
     "formik": "^2.4.5",
+    "luxon": "^3.4.4",
     "uu_plus4u5g02": "~1.26.1",
     "uu_plus4u5g02-app": "~1.26.1",
     "uu_plus4u5g02-elements": "~1.26.1",
@@ -18,7 +19,7 @@
     "uu5g05-forms": "~1.26.1",
     "uu5loaderg01": "1.6.0"
   },
-  "uuBuildSettings": {  
+  "uuBuildSettings": {
     "externals": {}
   },
   "devDependencies": {

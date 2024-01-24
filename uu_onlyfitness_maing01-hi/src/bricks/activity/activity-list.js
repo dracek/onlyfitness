@@ -6,6 +6,9 @@ import ActivityForm from "./activity-form"
 import { Modal, Button } from "uu5g05-elements";
 import ActivityRow from "./activity-row.js";
 import ConfirmModal from "../confirm-modal";
+import Uu5Forms from "uu5g05-forms";
+
+import { DateTime } from "luxon";
 
 const Css = {
   main: () =>
@@ -36,12 +39,26 @@ const Css = {
       margin: "25px",
       "& button": {
         color: "white",
-        padding: "25px",
+        padding: "19px",
+        border: "1px solid orange",
+        marginLeft: "10px",
         "&:hover": {
           color:'orange',
         }
       }
     }),
+  cal: () => 
+    Config.Css.css({
+      "& input": {
+        color:'black',
+        backgroundColor: "orange",
+
+      },
+      '& .uugds-close': {
+        display: "none"
+      }
+  })
+  
 };
 
 const ActivityList = (props) => {
@@ -54,9 +71,25 @@ const ActivityList = (props) => {
     const [currentId, setCurrentId] = useState(undefined);
     const [currentItem, setCurrentItem] = useState(undefined);
 
+    const [month, setMonth] = useState(undefined);
+
+    const setMonthFilter = (month) => {
+      setMonth(month);
+      const from =  month + "-01";
+      const fr = DateTime.fromISO(from);
+      const to = fr.plus({months: 1}).toFormat('yyyy-MM-dd');
+      const filter = {from: from, to: to};
+
+      callsMap.setFilter(filter)
+      callsMap.listActivities(filter);
+    }
+
     useEffect(() => {
+      const now = DateTime.now();
+      const first = now.startOf('month');
+      setMonthFilter(first.toFormat('yyyy-MM'));
+
       callsMap.listCategories();
-      callsMap.listActivities();
     }, []);
 
     // create
@@ -122,6 +155,7 @@ const ActivityList = (props) => {
         <h1>Activity page</h1>
 
         <div className={Css.createButton()}>
+          <Uu5Forms.Month.Input size={"l"} value={month} className={Css.cal()} onChange={(event)=> setMonthFilter(event.data.value)} />
           <Button onClick={onCreateClick}>create new activity</Button>
         </div>
 

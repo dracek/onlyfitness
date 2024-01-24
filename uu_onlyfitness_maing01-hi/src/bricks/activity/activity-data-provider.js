@@ -38,7 +38,10 @@ const ActivityDataProvider = createComponent({
     const [status, setStatus] = useState(STATUS_DONE);
     const [activityData, setActivityData] = useState([]);
     const [categoryData, setCategoryData] = useState([]);
+    const [activityFilter, setActivityFilter] = useState({});
     const { addAlert } = useAlertBus();
+
+    
 
     function infoMsg(msg){
       addAlert(Object.assign({
@@ -54,10 +57,10 @@ const ActivityDataProvider = createComponent({
       }, msg));
     }
 
-    async function listActivities() {
+    async function listActivities(activityFilter) {
       try {
         setStatus(STATUS_WAITING);
-        let res = await Calls.listActivities();
+        let res = await Calls.listActivities(activityFilter);
         setActivityData(res.itemList);
         setStatus(STATUS_DONE);
       } catch (error) {
@@ -103,7 +106,7 @@ const ActivityDataProvider = createComponent({
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot delete activity.'})
       }
-      listActivities(); // todo list with filter!
+      listActivities(activityFilter); // todo list with filter!
     }
 
     async function saveActivity(data) {
@@ -117,7 +120,7 @@ const ActivityDataProvider = createComponent({
         alertMsg({message: 'Cannot save activity.'})
         //console.error("NOT GOOD", error);
       }
-      listActivities();
+      listActivities(activityFilter);
     }
 
     async function editActivity(data) {
@@ -130,7 +133,11 @@ const ActivityDataProvider = createComponent({
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot edit activity.'})
       }
-      listActivities();
+      listActivities(activityFilter);
+    }
+
+    async function setFilter(filter) {
+      await setActivityFilter(filter);
     }
     //@@viewOff:private
 
@@ -148,7 +155,8 @@ const ActivityDataProvider = createComponent({
         editActivity,
         deleteActivity,
         listCategories,
-        listActivities
+        listActivities,
+        setFilter
       }
     };
 

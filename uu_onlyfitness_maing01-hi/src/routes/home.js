@@ -5,7 +5,6 @@ import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
-import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
@@ -15,11 +14,7 @@ import importLsi from "../lsi/import-lsi.js";
 
 //@@viewOn:css
 const Css = {
-  icon: () =>
-    Config.Css.css({
-      fontSize: 48,
-      lineHeight: "1em",
-    }),
+
 };
 //@@viewOff:css
 
@@ -52,21 +47,8 @@ let Home = createVisualComponent({
     return (
       <div {...attrs}>
         <RouteBar />
-        <WelcomeRow>
-          <Uu5Elements.Text category="story" segment="body" type="common">
-            <Content>{"<uu5string/>Proklik do <Uu5Elements.Link href='settings' >Nastavení</Uu5Elements.Link>"}</Content>
-            </Uu5Elements.Text>
-        </WelcomeRow>
-        <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
-          <Uu5Elements.Text category="story" segment="heading" type="h2">
-            <Lsi import={importLsi} path={["Home", "welcome"]} />
-          </Uu5Elements.Text>
-          {identity && (
-            <Uu5Elements.Text category="story" segment="heading" type="h2">
-              {identity.name}
-            </Uu5Elements.Text>
-          )}
-        </WelcomeRow>
+        <h1 style={{color: "white"}}>Home page</h1>
+
       </div>
     );
     //@@viewOff:render
