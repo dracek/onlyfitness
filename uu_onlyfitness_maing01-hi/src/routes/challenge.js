@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
-
+import { withRoute } from "uu_plus4u5g02-app";
 import ChallengeDataProvider from "../bricks/challenge/challenge-data-provider.js";
 import ChallengeList from "../bricks/challenge/challenge-list.js";
 
@@ -22,7 +22,7 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const Challenge = createVisualComponent({
+let Challenge = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Challenge",
   nestingLevel: ["areaCollection", "area"],
@@ -58,6 +58,8 @@ const Challenge = createVisualComponent({
     ) : null;
   },
 });
+
+Challenge = withRoute(Challenge, { authenticated: true });
 
 //@@viewOn:exports
 export { Challenge };

@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import { createComponent, useSession, useState } from "uu5g05";
 import { Children, cloneElement } from "react";
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 import Calls from "calls";
 import SettingsContext from "./settings-context.js";
 import { useAlertBus } from "uu5g05-elements";

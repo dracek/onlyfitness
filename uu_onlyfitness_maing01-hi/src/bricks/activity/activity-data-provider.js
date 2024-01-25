@@ -66,7 +66,6 @@ const ActivityDataProvider = createComponent({
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot get activities.'})
-        //console.error("NOT GOOD", error);
       }
     }
 
@@ -79,7 +78,6 @@ const ActivityDataProvider = createComponent({
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot get categories.'})
-        //console.error("NOT GOOD", error);
       }
     }
 
@@ -92,7 +90,6 @@ const ActivityDataProvider = createComponent({
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot get activity.'})
-        //console.error("NOT GOOD", error);
       }
     }
 
@@ -106,7 +103,7 @@ const ActivityDataProvider = createComponent({
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot delete activity.'})
       }
-      listActivities(activityFilter); // todo list with filter!
+      listActivities(activityFilter);
     }
 
     async function saveActivity(data) {
@@ -118,7 +115,6 @@ const ActivityDataProvider = createComponent({
       } catch (error) {
         setStatus(STATUS_ERROR);
         alertMsg({message: 'Cannot save activity.'})
-        //console.error("NOT GOOD", error);
       }
       listActivities(activityFilter);
     }

@@ -1,10 +1,10 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
 import RouteBar from "../core/route-bar.js";
-import UserProfile from "../bricks/user-profile.js";
-
-import SettingDataProvider from "../bricks/setting-data-provider.js";
-import Settings from "../bricks/settings.js";
+import UserProfile from "../bricks/user-settings/user-profile.js";
+import { withRoute } from "uu_plus4u5g02-app";
+import SettingDataProvider from "../bricks/user-settings/setting-data-provider.js";
+import Settings from "../bricks/user-settings/settings.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -21,7 +21,7 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const UserSetting = createVisualComponent({
+let UserSetting = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "UserSetting",
   nestingLevel: ["areaCollection", "area"],
@@ -57,6 +57,8 @@ const UserSetting = createVisualComponent({
     ) : null;
   },
 });
+
+UserSetting = withRoute(UserSetting, { authenticated: true });
 
 //@@viewOn:exports
 export { UserSetting };

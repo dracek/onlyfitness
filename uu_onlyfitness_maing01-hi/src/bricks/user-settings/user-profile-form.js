@@ -1,5 +1,5 @@
 import React from 'react';
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 import { useFormik } from 'formik';
 
 const Css = {

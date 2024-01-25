@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils } from "uu5g05";
+import { withRoute } from "uu_plus4u5g02-app";
 import RouteBar from "../core/route-bar.js";
 import ActivityDataProvider from "../bricks/activity/activity-data-provider.js";
 import ActivityList from "../bricks/activity/activity-list.js";
@@ -20,7 +21,7 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const Activity = createVisualComponent({
+let Activity = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "ActivityList",
   nestingLevel: ["areaCollection", "area"],
@@ -55,6 +56,8 @@ const Activity = createVisualComponent({
     ) : null;
   },
 });
+
+Activity = withRoute(Activity, { authenticated: true });
 
 //@@viewOn:exports
 export { Activity };

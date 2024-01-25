@@ -1,7 +1,7 @@
 import { Utils, useSession } from "uu5g05";
 import React, { useEffect, useState, useContext } from 'react';
 import UserProfileForm from './user-profile-form';
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 import SettingsContext from "./settings-context.js";
 
 const Css = {

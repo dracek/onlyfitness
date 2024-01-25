@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content, useEffect } from "uu5g05";
-import Config from "./config/config.js";
+import Config from "../config/config.js";
 //@@viewOff:imports
 
 //@@viewOn:constants

@@ -1,12 +1,13 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, Content, useSession, Lsi } from "uu5g05";
-import Uu5Elements from "uu5g05-elements";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
+import { Utils, createVisualComponent, useSession } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar.js";
-import importLsi from "../lsi/import-lsi.js";
+import HomeDataProvider from "../bricks/home/home-data-provider.js";
+import HomeList from "../bricks/home/home-list.js";
+
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -47,8 +48,9 @@ let Home = createVisualComponent({
     return (
       <div {...attrs}>
         <RouteBar />
-        <h1 style={{color: "white"}}>Home page</h1>
-
+        <HomeDataProvider>
+          <HomeList />
+        </HomeDataProvider>
       </div>
     );
     //@@viewOff:render
