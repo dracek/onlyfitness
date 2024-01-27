@@ -62,14 +62,6 @@ const ActivityRow = (props) => {
             <Icon icon="mdi-trash-can" />
           </Button>
         </div>
-        <div>{convertDate(data.activityDate)} - {convertCat(data.categoryId, categoryData)} ({data.time} minutes) 
-          <Button className={Css.editButton()} onClick={() => props.onEdit(data)}>
-            <Icon icon="mdi-pencil" />
-          </Button>
-          <Button className={Css.deleteButton()} onClick={() => props.onDelete(data.id)}>
-            <Icon icon="mdi-trash-can" />
-          </Button>
-        </div>
       </div>
     );
 };
