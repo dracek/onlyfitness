@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import Config from "../config/config.js";
 import HomeContext from "./home-context.js";
 import { ProgressBar } from "uu5g04-bricks";
+import {ActivityRings} from "@jonasdoesthings/react-activity-rings";
 
 const Css = {
   main: () =>
@@ -84,6 +85,7 @@ const HomeList = (props) => {
       <div className={Css.challengeRow()}>
         {props.category ? props.category.name : "Undefined"}: {activityHours} / {props.challenge.value}h 
         <ProgressBar progress={progress > 100 ? 100 : progress} striped colorSchema="orange" />
+        
       </div>
     );
   }

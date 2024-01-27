@@ -22,28 +22,30 @@ const Css = {
       backgroundColor: 'orange',
       color: 'black',
       marginTop: '25px',
-      cursor: "pointer"
+      cursor: "pointer",
+      margin: '40px 5px'
   }),
 
   select: () => 
     Config.Css.css({
       border: '1px solid orange', 
-      margin: '7px', 
+      margin: '10px',
       borderRadius: '20px', 
       padding: '5px', 
       backgroundColor: 'black', 
       color: 'white', 
-      width: '150px'
+      width: '150px',
     }),
 
   input: () => 
     Config.Css.css({
       border: `1px solid orange`,
-      margin: '7px',
+      margin: '10px',
       borderRadius: '20px',
       padding: '5px',
       backgroundColor: 'black',
-      color: 'white'
+      color: 'white',
+      width: '150px'
     }),
 
   inputError: () => 
@@ -108,23 +110,25 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
   return (
     <div className={Css.main()}>
       <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
-        <div>
-          <label for={"gender"}>Gender:</label>
+       
+        <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
           <select
             name="gender"
             value={formik.values.gender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={Css.select()}
-            placeholder="Select Gender"
           >
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
           </select>
         </div>
-        <div>
-          <label for={"height"}>Height:</label>
+
+       
+        <div className="form-group">
+          <label htmlFor="height">Height (cm):</label>
           <input
             type="number"
             name="height"
@@ -132,12 +136,13 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.height ? Css.inputError() : Css.input()}
-          />{"cm"}
+          />
         </div>
-        {formik.errors.height && <div className={Css.errorMessage()} >{formik.errors.height}</div>}
-        
-        <div>
-          <label for={"weight"}>Weight:</label>
+        {formik.errors.height && <div className={Css.errorMessage()}>{formik.errors.height}</div>}
+
+        {/* Weight field */}
+        <div className="form-group">
+          <label htmlFor="weight">Weight (kg):</label>
           <input
             type="number"
             name="weight"
@@ -145,12 +150,13 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.weight ? Css.inputError() : Css.input()}
-          />{"kg"}
+          />
         </div>
-        {formik.errors.weight && <div className={Css.errorMessage()} >{formik.errors.weight}</div>}
+        {formik.errors.weight && <div className={Css.errorMessage()}>{formik.errors.weight}</div>}
+
      
-        <div>
-          <label for={"age"}>Age:</label>
+        <div className="form-group">
+          <label htmlFor="age">Age (years):</label>
           <input
             type="number"
             name="age"
@@ -158,16 +164,19 @@ const UserProfileForm = ({ onCancel, onSave, data }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.age ? Css.inputError() : Css.input()}
-          />{"years"}
+          />
         </div>
-        {formik.errors.age && <div className={Css.errorMessage()} >{formik.errors.age}</div>}
+        {formik.errors.age && <div className={Css.errorMessage()}>{formik.errors.age}</div>}
 
-        <button className={Css.button()} type="submit">
-          Save
-        </button>
-        <button className={Css.button()} type="reset">
-          Cancel
-        </button>
+        
+        <div className="form-group">
+          <button className={Css.button()} type="submit">
+            Save
+          </button>
+          <button className={Css.button()} type="reset">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
