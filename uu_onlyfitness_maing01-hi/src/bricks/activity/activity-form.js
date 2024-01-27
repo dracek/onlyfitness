@@ -12,7 +12,8 @@ const Css = {
     Config.Css.css({
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center' 
+      alignItems: 'center' ,
+  
   }),
   
   button: () => 
@@ -44,7 +45,8 @@ const Css = {
       borderRadius: '20px',
       padding: '5px',
       backgroundColor: 'black',
-      color: 'white'
+      color: 'white',
+      width: '150px'
     }),
 
   inputError: () => 
@@ -65,9 +67,7 @@ const Css = {
 };
 
 const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
-
   const formik = useFormik({
-
     initialValues: data ? {
       categoryId: data.categoryId, 
       activityDate: new Date(data.activityDate).toISOString().substring(0,10),
@@ -77,17 +77,13 @@ const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
       activityDate: new Date(Date.now()).toISOString().substring(0,10),
       time: "10"
     },
-
-    enableReinitialize : true,
-
+    enableReinitialize: true,
     validate: (values) => {
       const errors = {};
-
       const time = parseInt(values.time, 10);
       if (isNaN(time) || time < 1 || time > 1440) {
         errors.time = "Time is allowed only between 1 and 1440 minutes";
       }
-
       return errors;
     },
     onSubmit: (values) => {
@@ -102,55 +98,52 @@ const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
   return (
     <div className={Css.main()}>
       <form onSubmit={formik.handleSubmit} onReset={onCancel} className={Css.form()}>
-
-        <div>
-          <label htmlFor={"categoryId"}>Category:</label>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <label htmlFor="categoryId">Category:</label>
           <select
+            id="categoryId"
             name="categoryId"
             value={formik.values.categoryId}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={Css.select()}
-            placeholder="Select Category"
           >
             {categoryData.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
           </select>
-        </div>
 
-        <div>
-          <label htmlFor={"activityDate"}>Date:</label>
+          <label htmlFor="activityDate">Date:</label>
           <input
-            type="string"
+            id="activityDate"
+            type="date"  
             name="activityDate"
             value={formik.values.activityDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.activityDate ? Css.inputError() : Css.input()}
           />
-        </div>
-        {formik.errors.activityDate && <div className={Css.errorMessage()} >{formik.errors.activityDate}</div>}
+          {formik.errors.activityDate && <div className={Css.errorMessage()}>{formik.errors.activityDate}</div>}
 
-        <div>
-          <label htmlFor={"time"}>Time:</label>
+          <label htmlFor="time">Time:</label>
           <input
+            id="time"
             type="number"
             name="time"
             value={formik.values.time}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={formik.errors.time ? Css.inputError() : Css.input()}
-          />{"minutes"}
+          />
+          {formik.errors.time && <div className={Css.errorMessage()}>{formik.errors.time}</div>}
         </div>
-        {formik.errors.time && <div className={Css.errorMessage()} >{formik.errors.time}</div>}
 
-        <div>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-evenly' }}>
           <button className={Css.button()} type="reset">
             Cancel
           </button>
           <button className={Css.button()} type="submit">
             Save
           </button>
-        </div>  
+        </div>
       </form>
     </div>
   );

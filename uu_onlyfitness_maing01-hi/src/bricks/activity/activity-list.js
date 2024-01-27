@@ -44,7 +44,8 @@ const Css = {
         marginLeft: "10px",
         "&:hover": {
           color:'orange',
-        }
+        },
+        borderRadius: "20px"
       }
     }),
   cal: () => 
@@ -52,7 +53,7 @@ const Css = {
       "& input": {
         color:'black',
         backgroundColor: "orange",
-
+        borderRadius: "20px"
       },
       '& .uugds-close': {
         display: "none"

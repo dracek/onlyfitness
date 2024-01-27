@@ -72,7 +72,9 @@ const UserProfile = (props) => {
           <UserProfileForm onSave={handleSave} onCancel={handleCancel} data={data} />
         ) : (
           <div className={Css.profileInfo()} >
-            <p>Gender: <span className={Css.colored()}>{data.gender} </span></p>
+            <p>Gender: <span className={Css.colored()}>{data.gender === 'M' ? 'Male' :
+            data.gender === 'F' ? 'Female' :
+              data.gender === 'O' ? 'Other' : ''} </span></p>
             <p>Height: <span className={Css.colored()}>{data.height}</span> cm</p>
             <p>Weight: <span className={Css.colored()}>{data.weight}</span> kg</p>
             <p>Age: <span className={Css.colored()}>{data.age}</span> years</p>
