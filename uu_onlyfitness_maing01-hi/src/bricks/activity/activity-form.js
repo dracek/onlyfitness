@@ -63,7 +63,15 @@ const Css = {
     Config.Css.css({
       color: 'orange',
       marginBottom: '7px'
-    })    
+    }),
+    
+  buttonRow: () => 
+    Config.Css.css({
+      marginTop: "25px",
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'space-evenly'
+    })   
 };
 
 const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
@@ -136,7 +144,7 @@ const ActivityForm = ({ onCancel, onSave, categoryData, data }) => {
           {formik.errors.time && <div className={Css.errorMessage()}>{formik.errors.time}</div>}
         </div>
 
-        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-evenly' }}>
+        <div className={Css.buttonRow()}>
           <button className={Css.button()} type="reset">
             Cancel
           </button>

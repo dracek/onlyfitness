@@ -42,13 +42,15 @@ const Css = {
       margin: "25px",
       "& button": {
         color: "white",
-        padding: "25px",
+        padding: "19px",
         border: "1px solid orange",
+        marginLeft: "10px",
         "&:hover": {
           color:'orange',
-        }
+        },
+        borderRadius: "20px"
       }
-    }),    
+    }),  
 };
 
 const ChallengeList = (props) => {

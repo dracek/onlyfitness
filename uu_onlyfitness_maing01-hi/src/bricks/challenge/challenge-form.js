@@ -61,7 +61,15 @@ const Css = {
     Config.Css.css({
       color: 'orange',
       marginBottom: '7px'
-    })    
+    }),
+    
+  buttonRow: () => 
+    Config.Css.css({
+      marginTop: "25px",
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'space-evenly'
+    })      
 };
 
 const ChallengeForm = ({ onCancel, onSave, categoryData, data }) => {
@@ -80,21 +88,6 @@ const ChallengeForm = ({ onCancel, onSave, categoryData, data }) => {
 
     validate: (values) => {
       const errors = {};
-
-      /*
-
-      // Validation for weight
-      const weight = parseInt(values.weight, 10);
-      if (isNaN(weight) || weight < 30 || weight > 300) {
-        errors.weight = "Are you sure about the weight? Our range is only between 30 and 300 kg.";
-      }
-
-      // Validation for height
-      const height = parseInt(values.height, 10);
-      if (isNaN(height) || height < 110 || height > 240) {
-        errors.height = "Are you sure about the height? Our range is only between 110 and 240 cm.";
-      }
-      */
 
       const time = parseInt(values.time, 10);
       if (isNaN(time) || time < 1 || time > 999) {
@@ -130,7 +123,7 @@ const ChallengeForm = ({ onCancel, onSave, categoryData, data }) => {
           </select>
         </div>
 
-        <div key="time">
+        <div>
           <label htmlFor={"time"}>Time:</label>
           <input
             type="number"
@@ -143,7 +136,7 @@ const ChallengeForm = ({ onCancel, onSave, categoryData, data }) => {
         </div>
         {formik.errors.time && <div className={Css.errorMessage()} >{formik.errors.time}</div>}
 
-        <div key="buttons">
+        <div className={Css.buttonRow()}>
           <button key="submit" className={Css.button()} type="submit">
             Save
           </button>

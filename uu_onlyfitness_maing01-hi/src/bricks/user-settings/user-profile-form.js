@@ -30,6 +30,7 @@ const Css = {
     Config.Css.css({
       border: '1px solid orange', 
       margin: '10px',
+      marginLeft: '40px',
       borderRadius: '20px', 
       padding: '5px', 
       backgroundColor: 'black', 

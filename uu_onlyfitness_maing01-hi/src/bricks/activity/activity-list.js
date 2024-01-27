@@ -37,11 +37,13 @@ const Css = {
   createButton: () =>  
     Config.Css.css({
       margin: "25px",
-      "& button": {
+      minHeight: "50px",
+      "& > button": {
         color: "white",
         padding: "19px",
         border: "1px solid orange",
         marginLeft: "10px",
+        marginTop: "5px",
         "&:hover": {
           color:'orange',
         },
@@ -50,14 +52,20 @@ const Css = {
     }),
   cal: () => 
     Config.Css.css({
-      "& input": {
+      "& > input": {
         color:'black',
         backgroundColor: "orange",
-        borderRadius: "20px"
+        borderRadius: "20px",
+        outline:'0px !important',
+        border: "0px solid black !important",
+        boxShadow: "none !important"
       },
-      '& .uugds-close': {
-        display: "none"
-      }
+      "& > input:focus": {
+        paddingTop: "-5px",
+        position: "relative",
+        top: "-5px"
+      },
+
   })
   
 };
@@ -150,13 +158,15 @@ const ActivityList = (props) => {
   
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
 
+    console.log(month);
+
     return (
       <div {...attrs}>
 
         <h1>Activity page</h1>
 
         <div className={Css.createButton()}>
-          <Uu5Forms.Month.Input size={"l"} value={month} className={Css.cal()} onChange={(event)=> setMonthFilter(event.data.value)} />
+          <Uu5Forms.Month.Input size="l" value={month} className={Css.cal()} clearIcon={null} onChange={(event)=> setMonthFilter(event.data.value)} />
           <Button onClick={onCreateClick}>create new activity</Button>
         </div>
 
