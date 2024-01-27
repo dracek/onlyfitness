@@ -1,6 +1,6 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
+    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Authenticated"],
     "useCaseMap": {}
   },
   "*": {
@@ -16,94 +16,94 @@
       },
       "sys/uuAppWorkspace/loadBasicData": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "defaultUve": {
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public","AwidLicenseOwner"]
+        "profileList": ["Authenticated","AwidLicenseOwner"]
       },
       "test": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "userSetting/create": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "userSetting/get": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "userSetting/update": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "userSetting/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "activity/get": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "activity/create": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "activity/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "activity/update": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "activity/list": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "category/create": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "category/get": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "category/update": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "category/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "category/list": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "challenge/get": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "challenge/create": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "challenge/update": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "challenge/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       },
       "challenge/list": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated"]
       }
     }
   }
