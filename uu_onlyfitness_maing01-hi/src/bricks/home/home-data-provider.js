@@ -1,6 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useSession, useState } from "uu5g05";
-import { Children, cloneElement } from "react";
+import { createComponent, useState } from "uu5g05";
 import Config from "../config/config.js";
 import Calls from "calls";
 import HomeContext from "./home-context.js";
@@ -35,7 +34,6 @@ const HomeDataProvider = createComponent({
     //@@viewOn:private
     const { children } = props;
 
-    const { identity } = useSession();
     const [status, setStatus] = useState(STATUS_DONE);
     const [challengeData, setChallengeData] = useState([]);
     const [categoryData, setCategoryData] = useState([]);

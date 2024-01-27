@@ -1,6 +1,5 @@
 //@@viewOn:imports
 import { createComponent, useSession, useState } from "uu5g05";
-import { Children, cloneElement } from "react";
 import Config from "../config/config.js";
 import Calls from "calls";
 import ActivityContext from "./activity-context.js";
@@ -40,8 +39,6 @@ const ActivityDataProvider = createComponent({
     const [categoryData, setCategoryData] = useState([]);
     const [activityFilter, setActivityFilter] = useState({});
     const { addAlert } = useAlertBus();
-
-    
 
     function infoMsg(msg){
       addAlert(Object.assign({

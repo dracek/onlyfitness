@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 import ChallengeDataProvider from "../bricks/challenge/challenge-data-provider.js";
 import ChallengeList from "../bricks/challenge/challenge-list.js";
