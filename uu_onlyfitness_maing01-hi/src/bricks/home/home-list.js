@@ -18,14 +18,25 @@ const Css = {
       "& > *": {
         display: "block",
         width: "100%"
+      },
+      "& h1": {
+        marginBottom: "45px"  
       }
     }),
 
   challengeRow: () =>  
     Config.Css.css({
       color:'orange',
-      marginBottom: "45px"
+      marginBottom: "45px",
+      "& > div": {
+        marginTop: "7px",
+      }
     }),
+
+  noChal: () =>  
+    Config.Css.css({
+      marginBottom: "45px"
+    }),  
 };
 
 const HomeList = (props) => {
@@ -53,7 +64,7 @@ const HomeList = (props) => {
       <div {...attrs}>
         <h1>Home</h1>
 
-        {noData && <div>
+        {noData && <div className={Css.noChal()} >
           No challenges yet :(
         </div>}
 

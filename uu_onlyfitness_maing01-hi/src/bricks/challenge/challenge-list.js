@@ -50,7 +50,11 @@ const Css = {
         },
         borderRadius: "20px"
       }
-    }),  
+    }),
+  noChal: () =>  
+    Config.Css.css({
+      marginTop: "20px"
+    }),      
 };
 
 const ChallengeList = (props) => {
@@ -143,7 +147,7 @@ const ChallengeList = (props) => {
           {challengeData.map(ch => <ChallengeRow key={ch.id} data={ch} onDelete = {onDeleteClick} onEdit={onEditClick} />)}
         </div>}
 
-        {noData && <div>
+        {noData && <div className={Css.noChal()}>
           No challenges yet :(
         </div>}
 

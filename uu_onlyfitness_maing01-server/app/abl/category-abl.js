@@ -94,7 +94,7 @@ class CategoryAbl {
       throw new Errors.Delete.CategoryNotPresent({ uuAppErrorMap });  
     }
 
-    // todo existing activity for this category
+    // todo existing activity for this category!!!!!!!!!!!!!!!!!
 
     await this.dao.remove(awid, dtoIn.id);
 
